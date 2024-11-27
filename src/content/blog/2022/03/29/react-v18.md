@@ -95,43 +95,60 @@ March 29, 2022 by [The React Team](/community/team)
         * SOME of them -- may require -- SOME additional migration effort  
   * **ONLY enabled | parts of your app / use NEW features**
 
-* TODO:
-The overall upgrade strategy is to get your application running on React 18 without breaking existing code. 
-Then you can gradually start adding concurrent features at your own pace. 
-You can use [`<StrictMode>`](/reference/react/StrictMode) to help surface concurrency-related bugs during development. 
-Strict Mode doesn't affect production behavior, but during development it will log extra warnings and double-invoke functions that are expected to be idempotent. 
-It won't catch everything, but it's effective at preventing the most common types of mistakes.
+* adopt concurrent features gradually
+  * goal
+    * get your application running | React 18 / NO breaking changes  
+  * [`<StrictMode>`](/reference/react/StrictMode)
+    * help surface concurrency-related bugs | development
+      * Reason: 🧠log extra warnings & double-invoke functions🧠
+      * NOT catch every possible mistakes
+    * NOT affect production behavior
 
-After you upgrade to React 18, you’ll be able to start using concurrent features immediately.
-For example, you can use startTransition to navigate between screens without blocking user input.
-Or useDeferredValue to throttle expensive re-renders.
+* once you upgrade to React 18 -> you can start using concurrent features
 
-However, long term, we expect the main way you’ll add concurrency to your app is by using a concurrent-enabled library or framework. 
-In most cases, you won’t interact with concurrent APIs directly.
-For example, instead of developers calling startTransition whenever they navigate to a new screen, router libraries will automatically wrap navigations in startTransition.
-
-It may take some time for libraries to upgrade to be concurrent compatible. 
-We’ve provided new APIs to make it easier for libraries to take advantage of concurrent features. 
-In the meantime, please be patient with maintainers as we work to gradually migrate the React ecosystem.
+* future releases idea about concurrency
+  * 💡-- via -- concurrent-enabled library or framework 💡
+    * != -- interact directly with -- concurrent APIs
+    * _Example:_ if you want to navigate to a new screen 
+      * you need to invoke `startTransition` -- will be replaced by -- router libraries / automatically wrap navigations in startTransition
 
 ## Suspense in Data Frameworks {/*suspense-in-data-frameworks*/}
 
-In React 18, you can start using [Suspense](/reference/react/Suspense) for data fetching in opinionated frameworks like Relay, Next.js, Hydrogen, or Remix. Ad hoc data fetching with Suspense is technically possible, but still not recommended as a general strategy.
+* [Suspense](/reference/react/Suspense)
+  * React v18+
+  * uses
+    * fetch
+      * data | opinionated frameworks (_Example:_ Relay, Next.js, Hydrogen, or Remix) 
+      * ad hoc data
+        * NOT recommended
+    * code splitting | client -- via -- `React.lazy` 
+  * possible future ideas
+    * expose additional primitives / easier to access your data -- via -- Suspense
+      * 👀EVEN WITHOUT using opinionated framework 👀
+    * SAME declarative Suspense fallback -- can handle -- ANY asynchronous operation (_Example:_ loading code, data, images, etc) 
+  * recommendations
+    * 👀integrate | your application’s architecture 👀
+      * _Example:_ your router, your data layer, and your server rendering environment
 
-In the future, we may expose additional primitives that could make it easier to access your data with Suspense, perhaps without the use of an opinionated framework. However, Suspense works best when it’s deeply integrated into your application’s architecture: your router, your data layer, and your server rendering environment. So even long term, we expect that libraries and frameworks will play a crucial role in the React ecosystem.
+## Server Components STILL in Development {/*server-components-is-still-in-development*/}
 
-As in previous versions of React, you can also use Suspense for code splitting on the client with React.lazy. But our vision for Suspense has always been about much more than loading code — the goal is to extend support for Suspense so that eventually, the same declarative Suspense fallback can handle any asynchronous operation (loading code, data, images, etc).
-
-## Server Components is Still in Development {/*server-components-is-still-in-development*/}
-
-[**Server Components**](/blog/2020/12/21/data-fetching-with-react-server-components) is an upcoming feature that allows developers to build apps that span the server and client, combining the rich interactivity of client-side apps with the improved performance of traditional server rendering. Server Components is not inherently coupled to Concurrent React, but it’s designed to work best with concurrent features like Suspense and streaming server rendering.
-
-Server Components is still experimental, but we expect to release an initial version in a minor 18.x release. In the meantime, we’re working with frameworks like Next.js, Hydrogen, and Remix to advance the proposal and get it ready for broad adoption.
+* [**Server Components**](/blog/2020/12/21/data-fetching-with-react-server-components)
+  * ⚠️NOT -- inherently coupled to -- Concurrent React ⚠️
+    * BUT designed -- to work best with -- concurrent features 
+  * == upcoming feature / 
+    * allows developers
+      * build apps / span the server and client
+        * == interactivity of client-side apps + traditional server rendering
+  * STILL experimental
+    * expectations -- initial version v18.x --
+    * meantime -- via -- frameworks (_Example:_ Next.js, Hydrogen, and Remix)
+      * Reason: 🧠broad adoption 🧠
 
 ## What's New in React 18 {/*whats-new-in-react-18*/}
 
 ### New Feature: Automatic Batching {/*new-feature-automatic-batching*/}
 
+* TODO:
 Batching is when React groups multiple state updates into a single re-render for better performance. Without automatic batching, we only batched updates inside React event handlers. Updates inside of promises, setTimeout, native event handlers, or any other event were not batched in React by default. With automatic batching, these updates will be batched automatically:
 
 
