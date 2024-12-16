@@ -1,3 +1,12 @@
+* goal
+  * how to
+    * create and nest components
+    * add markup and styles
+    * display data
+    * render conditions and lists
+    * respond to events and update the screen
+    * share data between components
+
 * GET STARTED
   * [Quick Start](quickStart.md)
     * [Tutorial: Tic-Tac-Toe](tutorial-tic-tac-toe.md)
