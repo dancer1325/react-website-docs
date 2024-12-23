@@ -28,16 +28,18 @@ permalink: index.html
   * from components → create UI
     * ⚠️ SEVERAL can be combined perfectly ⚠️
   * `export default FunctionName {…}`
-    * ⚠️specify the **MAIN component** | file ⚠️
+    * ⚠️specify the MAIN  REACT component | file ⚠️
   * 👀== JS functions / return markup 👀
   * JSX === JS functions + markup
     * markup
       * Reason: 🧠 ≠ HTML 🧠
-    * ⚠️MOST used way to write React components ⚠️
+    * ⚠️MOST used (BUT NOT MANDATORY) way to write React components ⚠️
       * JSX != React
     * .js
+    * vs HTML
+      * stricter
     * `CapitalLetter…`
-      * naming convention
+      * ⚠️naming convention, MANDATORY ⚠️
         * ≠ [HTML tags](https://www.w3schools.com/TAGS/default.asp)
     * 👀make easier about components 👀
       * create
