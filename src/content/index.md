@@ -29,6 +29,7 @@ permalink: index.html
     * ⚠️ SEVERAL can be combined perfectly ⚠️
   * `export default FunctionName {…}`
     * ⚠️specify the **MAIN component** | file ⚠️
+  * 👀== JS functions / return markup 👀
   * JSX === JS functions + markup
     * markup
       * Reason: 🧠 ≠ HTML 🧠
