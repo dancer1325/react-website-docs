@@ -114,7 +114,7 @@ March 29, 2022 by [The React Team](/community/team)
 
 ## Suspense in Data Frameworks {/*suspense-in-data-frameworks*/}
 
-* [Suspense](/reference/react/Suspense)
+* [Suspense](/src/content/reference/react/Suspense.md)
   * React v18+
   * uses
     * fetch
