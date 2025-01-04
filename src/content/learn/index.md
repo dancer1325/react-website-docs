@@ -60,12 +60,8 @@
           {
   * [Adding Interactivity](adding-interactivity.md)
     * [Responding to Events](responding-to-events.md)
-                    "path": "/learn/"
-                  },
-                  {
-                    "title": "State: A Component's Memory",
-                    "path": "/learn/state-a-components-memory"
-                  },
+    * [State: A Component's Memory](state-a-components-memory.md)
+    * 
                   {
                     "title": "Render and Commit",
                     "path": "/learn/render-and-commit"
