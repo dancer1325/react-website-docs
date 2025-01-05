@@ -4,7 +4,7 @@
 
 ## How was it created?
 
-* `npx create-react-app quick-start`
+* `npx create-react-app tic-tac-toe`
 
 ## How to run?
 
