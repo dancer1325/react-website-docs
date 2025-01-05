@@ -1,0 +1,11 @@
+.photo {
+    height: 900px;
+    border-color: #005cc5;
+}
+body {
+    padding: 0;
+    margin: 0
+}
+body > div {
+    padding: 20px;
+}

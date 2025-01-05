@@ -2,561 +2,132 @@
 title: Describing the UI
 ---
 
-<Intro>
+* React
+  * 👀== JS library -- for -- rendering UI 👀
+    * UI == SEVERAL SMALL units (_Example:_ buttons, text, and images) / combined into React Components
 
-React is a JavaScript library for rendering user interfaces (UI). UI is built from small units like buttons, text, and images. React lets you combine them into reusable, nestable *components.* From web sites to phone apps, everything on the screen can be broken down into components. In this chapter, you'll learn to create, customize, and conditionally display React components.
+* goal
+  * React components, how to
+    * create,
+    * customize,
+    * conditionally display 
 
-</Intro>
-
-<YouWillLearn isChapter={true}>
-
-* [How to write your first React component](/learn/your-first-component)
-* [When and how to create multi-component files](/learn/importing-and-exporting-components)
-* [How to add markup to JavaScript with JSX](/learn/writing-markup-with-jsx)
-* [How to use curly braces with JSX to access JavaScript functionality from your components](/learn/javascript-in-jsx-with-curly-braces)
-* [How to configure components with props](/learn/passing-props-to-a-component)
-* [How to conditionally render components](/learn/conditional-rendering)
-* [How to render multiple components at a time](/learn/rendering-lists)
-* [How to avoid confusing bugs by keeping components pure](/learn/keeping-components-pure)
-* [Why understanding your UI as trees is useful](/learn/understanding-your-ui-as-a-tree)
-
-</YouWillLearn>
+* [code](/samples/learn/describingTheUI/describing-the-ui)
 
 ## Your first component {/*your-first-component*/}
 
-React applications are built from isolated pieces of UI called *components*. A React component is a JavaScript function that you can sprinkle with markup. Components can be as small as a button, or as large as an entire page. Here is a `Gallery` component rendering three `Profile` components:
+* React applications
+  * == React Components 
 
-<Sandpack>
-
-```js
-function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
-      alt="Katherine Johnson"
-    />
-  );
-}
-
-export default function Gallery() {
-  return (
-    <section>
-      <h1>Amazing scientists</h1>
-      <Profile />
-      <Profile />
-      <Profile />
-    </section>
-  );
-}
-```
-
-```css
-img { margin: 0 10px 10px 0; height: 90px; }
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/your-first-component">
-
-Read **[Your First Component](/learn/your-first-component)** to learn how to declare and use React components.
-
-</LearnMore>
+* see [here](your-first-component)
 
 ## Importing and exporting components {/*importing-and-exporting-components*/}
 
-You can declare many components in one file, but large files can get difficult to navigate. To solve this, you can *export* a component into its own file, and then *import* that component from another file:
+* SEVERAL React components can be declared | 1! file
+  * recommendations
+    * 👀export a component | its OWN file + import that component | ANOTHER file 👀
 
-
-<Sandpack>
-
-```js src/App.js hidden
-import Gallery from './Gallery.js';
-
-export default function App() {
-  return (
-    <Gallery />
-  );
-}
-```
-
-```js src/Gallery.js active
-import Profile from './Profile.js';
-
-export default function Gallery() {
-  return (
-    <section>
-      <h1>Amazing scientists</h1>
-      <Profile />
-      <Profile />
-      <Profile />
-    </section>
-  );
-}
-```
-
-```js src/Profile.js
-export default function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
-}
-```
-
-```css
-img { margin: 0 10px 10px 0; }
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/importing-and-exporting-components">
-
-Read **[Importing and Exporting Components](/learn/importing-and-exporting-components)** to learn how to split components into their own files.
-
-</LearnMore>
+* see [Importing and Exporting Components](importing-and-exporting-components)
 
 ## Writing markup with JSX {/*writing-markup-with-jsx*/}
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information.
+* EACH React component
+  * == JS function / MAY contain some markup (HTML)
+  * -- via -- JSX == HTML + dynamic information
+  
+* see [here](writing-markup-with-jsx)
 
-If we paste existing HTML markup into a React component, it won't always work:
+## JavaScript in JSX -- via -- `{}` {/*javascript-in-jsx-with-curly-braces*/}
 
-<Sandpack>
+* JSX 
+  * lets you, write
+    * HTML-like markup | JS file
+    * JS logic or reference a dynamic property | markup -- via -- `{}`
 
-```js
-export default function TodoList() {
-  return (
-    // This doesn't quite work!
-    <h1>Hedy Lamarr's Todos</h1>
-    <img
-      src="https://i.imgur.com/yXOvdOSs.jpg"
-      alt="Hedy Lamarr"
-      class="photo"
-    >
-    <ul>
-      <li>Invent new traffic lights
-      <li>Rehearse a movie scene
-      <li>Improve spectrum technology
-    </ul>
-  );
-}
-```
-
-```css
-img { height: 90px; }
-```
-
-</Sandpack>
-
-If you have existing HTML like this, you can fix it using a [converter](https://transform.tools/html-to-jsx):
-
-<Sandpack>
-
-```js
-export default function TodoList() {
-  return (
-    <>
-      <h1>Hedy Lamarr's Todos</h1>
-      <img
-        src="https://i.imgur.com/yXOvdOSs.jpg"
-        alt="Hedy Lamarr"
-        className="photo"
-      />
-      <ul>
-        <li>Invent new traffic lights</li>
-        <li>Rehearse a movie scene</li>
-        <li>Improve spectrum technology</li>
-      </ul>
-    </>
-  );
-}
-```
-
-```css
-img { height: 90px; }
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/writing-markup-with-jsx">
-
-Read **[Writing Markup with JSX](/learn/writing-markup-with-jsx)** to learn how to write valid JSX.
-
-</LearnMore>
-
-## JavaScript in JSX with curly braces {/*javascript-in-jsx-with-curly-braces*/}
-
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to "open a window" to JavaScript:
-
-<Sandpack>
-
-```js
-const person = {
-  name: 'Gregorio Y. Zara',
-  theme: {
-    backgroundColor: 'black',
-    color: 'pink'
-  }
-};
-
-export default function TodoList() {
-  return (
-    <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
-      <img
-        className="avatar"
-        src="https://i.imgur.com/7vQD0fPs.jpg"
-        alt="Gregorio Y. Zara"
-      />
-      <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
-      </ul>
-    </div>
-  );
-}
-```
-
-```css
-body { padding: 0; margin: 0 }
-body > div > div { padding: 20px; }
-.avatar { border-radius: 50%; height: 90px; }
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/javascript-in-jsx-with-curly-braces">
-
-Read **[JavaScript in JSX with Curly Braces](/learn/javascript-in-jsx-with-curly-braces)** to learn how to access JavaScript data from JSX.
-
-</LearnMore>
+* see [JavaScript in JSX with Curly Braces](javascript-in-jsx-with-curly-braces)
 
 ## Passing props to a component {/*passing-props-to-a-component*/}
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, functions, and even JSX!
+* React components' props
+  * allows
+    * React Component1 <- communicate with -> React Component2
+    * parent React component -- pass information to -> its children React components 
+  * == 👀HTML attributes, BUT ACCEPT
+    * objects,
+    * arrays,
+    * functions,
+    * OWN JSX 👀
 
-<Sandpack>
-
-```js
-import { getImageUrl } from './utils.js'
-
-export default function Profile() {
-  return (
-    <Card>
-      <Avatar
-        size={100}
-        person={{
-          name: 'Katsuko Saruhashi',
-          imageId: 'YfeOqp2'
-        }}
-      />
-    </Card>
-  );
-}
-
-function Avatar({ person, size }) {
-  return (
-    <img
-      className="avatar"
-      src={getImageUrl(person)}
-      alt={person.name}
-      width={size}
-      height={size}
-    />
-  );
-}
-
-function Card({ children }) {
-  return (
-    <div className="card">
-      {children}
-    </div>
-  );
-}
-
-```
-
-```js src/utils.js
-export function getImageUrl(person, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
-}
-```
-
-```css
-.card {
-  width: fit-content;
-  margin: 5px;
-  padding: 5px;
-  font-size: 20px;
-  text-align: center;
-  border: 1px solid #aaa;
-  border-radius: 20px;
-  background: #fff;
-}
-.avatar {
-  margin: 20px;
-  border-radius: 50%;
-}
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/passing-props-to-a-component">
-
-Read **[Passing Props to a Component](/learn/passing-props-to-a-component)** to learn how to pass and read props.
-
-</LearnMore>
+* see [here](passing-props-to-a-component)
 
 ## Conditional rendering {/*conditional-rendering*/}
 
-Your components will often need to display different things depending on different conditions. In React, you can conditionally render JSX using JavaScript syntax like `if` statements, `&&`, and `? :` operators.
+* ways to render conditionally
+  * `if`
+  * `&&`
+    * allows
+      * rendering the NEXT element
+  * `? :`
 
-In this example, the JavaScript `&&` operator is used to conditionally render a checkmark:
-
-<Sandpack>
-
-```js
-function Item({ name, isPacked }) {
-  return (
-    <li className="item">
-      {name} {isPacked && '✅'}
-    </li>
-  );
-}
-
-export default function PackingList() {
-  return (
-    <section>
-      <h1>Sally Ride's Packing List</h1>
-      <ul>
-        <Item
-          isPacked={true}
-          name="Space suit"
-        />
-        <Item
-          isPacked={true}
-          name="Helmet with a golden leaf"
-        />
-        <Item
-          isPacked={false}
-          name="Photo of Tam"
-        />
-      </ul>
-    </section>
-  );
-}
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/conditional-rendering">
-
-Read **[Conditional Rendering](/learn/conditional-rendering)** to learn the different ways to render content conditionally.
-
-</LearnMore>
+* see [here](conditional-rendering)
 
 ## Rendering lists {/*rendering-lists*/}
 
-You will often want to display multiple similar components from a collection of data. You can use JavaScript's `filter()` and `map()` with React to filter and transform your array of data into an array of components.
+* use case
+  * from a collection of data -- via JS's `map()` -- display MULTIPLE similar components
 
-For each array item, you will need to specify a `key`. Usually, you will want to use an ID from the database as a `key`. Keys let React keep track of each item's place in the list even if the list changes.
+* array's item
+  * requirements
+    * `key`
+      * == database's ID
+      * -> React keep track of EACH item's place | list, ALTHOUGH list changes
 
-<Sandpack>
-
-```js src/App.js
-import { people } from './data.js';
-import { getImageUrl } from './utils.js';
-
-export default function List() {
-  const listItems = people.map(person =>
-    <li key={person.id}>
-      <img
-        src={getImageUrl(person)}
-        alt={person.name}
-      />
-      <p>
-        <b>{person.name}:</b>
-        {' ' + person.profession + ' '}
-        known for {person.accomplishment}
-      </p>
-    </li>
-  );
-  return (
-    <article>
-      <h1>Scientists</h1>
-      <ul>{listItems}</ul>
-    </article>
-  );
-}
-```
-
-```js src/data.js
-export const people = [{
-  id: 0,
-  name: 'Creola Katherine Johnson',
-  profession: 'mathematician',
-  accomplishment: 'spaceflight calculations',
-  imageId: 'MK3eW3A'
-}, {
-  id: 1,
-  name: 'Mario José Molina-Pasquel Henríquez',
-  profession: 'chemist',
-  accomplishment: 'discovery of Arctic ozone hole',
-  imageId: 'mynHUSa'
-}, {
-  id: 2,
-  name: 'Mohammad Abdus Salam',
-  profession: 'physicist',
-  accomplishment: 'electromagnetism theory',
-  imageId: 'bE7W1ji'
-}, {
-  id: 3,
-  name: 'Percy Lavon Julian',
-  profession: 'chemist',
-  accomplishment: 'pioneering cortisone drugs, steroids and birth control pills',
-  imageId: 'IOjWm71'
-}, {
-  id: 4,
-  name: 'Subrahmanyan Chandrasekhar',
-  profession: 'astrophysicist',
-  accomplishment: 'white dwarf star mass calculations',
-  imageId: 'lrWQx8l'
-}];
-```
-
-```js src/utils.js
-export function getImageUrl(person) {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    's.jpg'
-  );
-}
-```
-
-```css
-ul { list-style-type: none; padding: 0px 10px; }
-li {
-  margin-bottom: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-}
-img { width: 100px; height: 100px; border-radius: 50%; }
-h1 { font-size: 22px; }
-h2 { font-size: 20px; }
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/rendering-lists">
-
-Read **[Rendering Lists](/learn/rendering-lists)** to learn how to render a list of components, and how to choose a key.
-
-</LearnMore>
+* see [here](rendering-lists)
 
 ## Keeping components pure {/*keeping-components-pure*/}
 
-Some JavaScript functions are *pure.* A pure function:
+* JavaScript pure functions 
+  * == OWN business + SameInputsThenSameOutputs
+    * OWN business
+      * NO change any objects or variables / existed | BEFORE it was called 
+    * SameInputsThenSameOutputs
+      * if you pass SAME inputs -> ALWAYS return the SAME result
+  * allows
+    * avoid an entire class of baffling bugs
+    * unpredictable behavior | your codebase grows
 
-* **Minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* see [here](/learn/keeping-components-pure)
 
-By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. Here is an example of an impure component:
+## Your UI == tree {/*your-ui-as-a-tree*/}
 
-<Sandpack>
+* React render tree
+  * == representation of the relationship parent component -- & -- child components
+    * == React models -- via -- trees
+  * category of components
+    * top-level components
+      * == components near the top of the tree == near the root component
+    * leaf components
+      * 👀== components / NO child components 👀
+    * allows
+      * understanding data flow
+      * rendering performance
+  * _Example:_ tree graph / 5 nodes / EACH node == component
+    * root node | top the tree graph 
+    * 2 IMMEDIATE children
+    * EACH arrows is labelled with 'renders'
 
-```js
-let guest = 0;
+    ![](/public/images/docs/diagrams/generic_render_tree.png)
 
-function Cup() {
-  // Bad: changing a preexisting variable!
-  guest = guest + 1;
-  return <h2>Tea cup for guest #{guest}</h2>;
-}
+* module dependency tree
+  * := modelling the relationship between JS modules
+  * 'RootModule.js'
+    * == top-most node
+  * uses
+    * by build tools, to bundle ALL relevant JavaScript code -- for the -- client to download & render
+    * debugging easily
+  * _Example:_ tree graph / 5 nodes / EACH node == JS module
+    * EACH arrow is labelled as 'imports' 
 
-export default function TeaSet() {
-  return (
-    <>
-      <Cup />
-      <Cup />
-      <Cup />
-    </>
-  );
-}
-```
+  ![](/public/images/docs/diagrams/generic_dependency_tree.png)
 
-</Sandpack>
-
-You can make this component pure by passing a prop instead of modifying a preexisting variable:
-
-<Sandpack>
-
-```js
-function Cup({ guest }) {
-  return <h2>Tea cup for guest #{guest}</h2>;
-}
-
-export default function TeaSet() {
-  return (
-    <>
-      <Cup guest={1} />
-      <Cup guest={2} />
-      <Cup guest={3} />
-    </>
-  );
-}
-```
-
-</Sandpack>
-
-<LearnMore path="/learn/keeping-components-pure">
-
-Read **[Keeping Components Pure](/learn/keeping-components-pure)** to learn how to write components as pure, predictable functions.
-
-</LearnMore>
-
-## Your UI as a tree {/*your-ui-as-a-tree*/}
-
-React uses trees to model the relationships between components and modules. 
-
-A React render tree is a representation of the parent and child relationship between components. 
-
-<Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">
-
-An example React render tree.
-
-</Diagram>
-
-Components near the top of the tree, near the root component, are considered top-level components. Components with no child components are leaf components. This categorization of components is useful for understanding data flow and rendering performance.
-
-Modelling the relationship between JavaScript modules is another useful way to understand your app. We refer to it as a module dependency tree. 
-
-<Diagram name="generic_dependency_tree" height={250} width={500} alt="A tree graph with five nodes. Each node represents a JavaScript module. The top-most node is labelled 'RootModule.js'. It has three arrows extending to the nodes: 'ModuleA.js', 'ModuleB.js', and 'ModuleC.js'. Each arrow is labelled as 'imports'. 'ModuleC.js' node has a single 'imports' arrow that points to a node labelled 'ModuleD.js'.">
-
-An example module dependency tree.
-
-</Diagram>
-
-A dependency tree is often used by build tools to bundle all the relevant JavaScript code for the client to download and render. A large bundle size regresses user experience for React apps. Understanding the module dependency tree is helpful to debug such issues. 
-
-<LearnMore path="/learn/understanding-your-ui-as-a-tree">
-
-Read **[Your UI as a Tree](/learn/understanding-your-ui-as-a-tree)** to learn how to create a render and module dependency trees for a React app and how they're useful mental models for improving user experience and performance.
-
-</LearnMore>
-
-
-## What's next? {/*whats-next*/}
-
-Head over to [Your First Component](/learn/your-first-component) to start reading this chapter page by page!
-
-Or, if you're already familiar with these topics, why not read about [Adding Interactivity](/learn/adding-interactivity)?
+* see [Your UI as a Tree](understanding-your-ui-as-a-tree)
