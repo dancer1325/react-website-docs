@@ -3,148 +3,82 @@ title: Using TypeScript
 re: https://github.com/reactjs/react.dev/issues/5960
 ---
 
-<Intro>
+* TypeScript
+  * == popular way -- to -- add type definitions | JS codebases
+  * [supports JSX](writing-markup-with-jsx)
+  * if you want FULL React Web support -> add | your project
+    * [`@types/react`](https://www.npmjs.com/package/@types/react)
+    * [`@types/react-dom`](https://www.npmjs.com/package/@types/react-dom) 
 
-TypeScript is a popular way to add type definitions to JavaScript codebases. Out of the box, TypeScript [supports JSX](/learn/writing-markup-with-jsx) and you can get full React Web support by adding [`@types/react`](https://www.npmjs.com/package/@types/react) and [`@types/react-dom`](https://www.npmjs.com/package/@types/react-dom) to your project.
+* goal
+  * [TypeScript -- with -- React Components](#typescript-with-react-components-typescript-with-react-components)
+  * [COMMON types -- from -- `@types/react`](#useful-types-useful-types)
+  * [FURTHER learning locations](#further-learning-further-learning)
 
-</Intro>
-
-<YouWillLearn>
-
-* [TypeScript with React Components](/learn/typescript#typescript-with-react-components)
-* [Examples of typing with Hooks](/learn/typescript#example-hooks)
-* [Common types from `@types/react`](/learn/typescript/#useful-types)
-* [Further learning locations](/learn/typescript/#further-learning)
-
-</YouWillLearn>
+* [code](/samples/getStarted/typescript)
 
 ## Installation {/*installation*/}
 
-All [production-grade React frameworks](/learn/start-a-new-react-project#production-grade-react-frameworks) offer support for using TypeScript. Follow the framework specific guide for installation:
+* ALL [production-grade React frameworks](start-a-new-react-project.md#production-grade-react-frameworks-production-grade-react-frameworks) -- offer support for -- using TypeScript
+  * [Next.js](https://nextjs.org/docs/app/building-your-application/configuring/typescript)
+  * [Remix](https://remix.run/docs/en/1.19.2/guides/typescript)
+  * [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/)
+  * [Expo](https://docs.expo.dev/guides/typescript/)
 
-- [Next.js](https://nextjs.org/docs/app/building-your-application/configuring/typescript)
-- [Remix](https://remix.run/docs/en/1.19.2/guides/typescript)
-- [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/)
-- [Expo](https://docs.expo.dev/guides/typescript/)
+### Adding TypeScript | EXISTING React project {/*adding-typescript-to-an-existing-react-project*/}
 
-### Adding TypeScript to an existing React project {/*adding-typescript-to-an-existing-react-project*/}
-
-To install the latest version of React's type definitions:
-
-<TerminalBlock>
-npm install @types/react @types/react-dom
-</TerminalBlock>
-
-The following compiler options need to be set in your `tsconfig.json`:
-
-1. `dom` must be included in [`lib`](https://www.typescriptlang.org/tsconfig/#lib) (Note: If no `lib` option is specified, `dom` is included by default).
-1. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx) must be set to one of the valid options. `preserve` should suffice for most applications.
-  If you're publishing a library, consult the [`jsx` documentation](https://www.typescriptlang.org/tsconfig/#jsx) on what value to choose.
+* `npm install @types/react @types/react-dom`
+* set | your `tsconfig.json`
+  1. include [`lib.dom`](https://www.typescriptlang.org/tsconfig/#lib) 
+     1. if `lib` option is NOT specified -> `dom` is included by default
+  2. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx) MUST be set | one of the valid options 
+     1. `preserve` -- should suffice for -- MOST applications
+     2. if you're publishing a library -> consult the [`jsx` documentation](https://www.typescriptlang.org/tsconfig/#jsx) -- to -- choose the value
 
 ## TypeScript with React Components {/*typescript-with-react-components*/}
 
-<Note>
+* `.tsx`
+  * == TypeScript + JSX
+  * allows
+    * providing types -- for -- your component's props ->
+      * correctness checking
+      * inline documentation | editors
 
-Every file containing JSX must use the `.tsx` file extension. This is a TypeScript-specific extension that tells TypeScript that this file contains JSX.
+* TypeScript + React == JavaScript + React
 
-</Note>
-
-Writing TypeScript with React is very similar to writing JavaScript with React. The key difference when working with a component is that you can provide types for your component's props. These types can be used for correctness checking and providing inline documentation in editors.
-
-Taking the [`MyButton` component](/learn#components) from the [Quick Start](/learn) guide, we can add a type describing the `title` for the button:
-
-<Sandpack>
-
-```tsx src/App.tsx active
-function MyButton({ title }: { title: string }) {
-  return (
-    <button>{title}</button>
-  );
-}
-
-export default function MyApp() {
-  return (
-    <div>
-      <h1>Welcome to my app</h1>
-      <MyButton title="I'm a button" />
-    </div>
-  );
-}
-```
-
-```js src/App.js hidden
-import AppTSX from "./App.tsx";
-export default App = AppTSX;
-```
-</Sandpack>
-
- <Note>
-
-These sandboxes can handle TypeScript code, but they do not run the type-checker. This means you can amend the TypeScript sandboxes to learn, but you won't get any type errors or warnings. To get type-checking, you can use the [TypeScript Playground](https://www.typescriptlang.org/play) or use a more fully-featured online sandbox.
-
-</Note>
-
-This inline syntax is the simplest way to provide types for a component, though once you start to have a few fields to describe it can become unwieldy. Instead, you can use an `interface` or `type` to describe the component's props:
-
-<Sandpack>
-
-```tsx src/App.tsx active
-interface MyButtonProps {
-  /** The text to display inside the button */
-  title: string;
-  /** Whether the button can be interacted with */
-  disabled: boolean;
-}
-
-function MyButton({ title, disabled }: MyButtonProps) {
-  return (
-    <button disabled={disabled}>{title}</button>
-  );
-}
-
-export default function MyApp() {
-  return (
-    <div>
-      <h1>Welcome to my app</h1>
-      <MyButton title="I'm a disabled button" disabled={true}/>
-    </div>
-  );
-}
-```
-
-```js src/App.js hidden
-import AppTSX from "./App.tsx";
-export default App = AppTSX;
-```
-
-</Sandpack>
-
-The type describing your component's props can be as simple or as complex as you need, though they should be an object type described with either a `type` or `interface`. You can learn about how TypeScript describes objects in [Object Types](https://www.typescriptlang.org/docs/handbook/2/objects.html) but you may also be interested in using [Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) to describe a prop that can be one of a few different types and the [Creating Types from Types](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html) guide for more advanced use cases.
-
+* see
+  * [Typescript Object Types](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+  * [Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
+  * [Creating Types -- from -- Types](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html)
 
 ## Example Hooks {/*example-hooks*/}
 
-The type definitions from `@types/react` include types for the built-in Hooks, so you can use them in your components without any additional setup. They are built to take into account the code you write in your component, so you will get [inferred types](https://www.typescriptlang.org/docs/handbook/type-inference.html) a lot of the time and ideally do not need to handle the minutiae of providing the types. 
-
-However, we can look at a few examples of how to provide types for Hooks.
+* `@types/react`
+  * == type definitions + types for the built-in Hooks + ... 
+  * NORMALLY, you will get [inferred types](https://www.typescriptlang.org/docs/handbook/type-inference.html)
+    * Reason: 🧠They are built / take into account the code you write | your component 🧠   
 
 ### `useState` {/*typing-usestate*/}
 
-The [`useState` Hook](/reference/react/useState) will re-use the value passed in as the initial state to determine what the type of the value should be. For example:
+* TODO:
+The [`useState` Hook](../reference/react/useState) will re-use the value passed in as the initial state to determine what the type of the value should be
+For example:
 
 ```ts
 // Infer the type as "boolean"
 const [enabled, setEnabled] = useState(false);
 ```
 
-This will assign the type of `boolean` to `enabled`, and `setEnabled` will be a function accepting either a `boolean` argument, or a function that returns a `boolean`. If you want to explicitly provide a type for the state, you can do so by providing a type argument to the `useState` call:
+This will assign the type of `boolean` to `enabled`, and `setEnabled` will be a function accepting either a `boolean` argument, or a function that returns a `boolean`.
+If you want to explicitly provide a type for the state, you can do so by providing a type argument to the `useState` call:
 
 ```ts 
 // Explicitly set the type to "boolean"
 const [enabled, setEnabled] = useState<boolean>(false);
 ```
 
-This isn't very useful in this case, but a common case where you may want to provide a type is when you have a union type. For example, `status` here can be one of a few different strings:
+This isn't very useful in this case, but a common case where you may want to provide a type is when you have a union type.
+For example, `status` here can be one of a few different strings:
 
 ```ts
 type Status = "idle" | "loading" | "success" | "error";
@@ -166,7 +100,9 @@ const [requestState, setRequestState] = useState<RequestState>({ status: 'idle' 
 
 ### `useReducer` {/*typing-usereducer*/}
 
-The [`useReducer` Hook](/reference/react/useReducer) is a more complex Hook that takes a reducer function and an initial state. The types for the reducer function are inferred from the initial state. You can optionally provide a type argument to the `useReducer` call to provide a type for the state, but it is often better to set the type on the initial state instead:
+The [`useReducer` Hook](/reference/react/useReducer) is a more complex Hook that takes a reducer function and an initial state. 
+The types for the reducer function are inferred from the initial state. 
+You can optionally provide a type argument to the `useReducer` call to provide a type for the state, but it is often better to set the type on the initial state instead:
 
 <Sandpack>
 
@@ -242,7 +178,8 @@ export default function App() {
 
 ### `useContext` {/*typing-usecontext*/}
 
-The [`useContext` Hook](/reference/react/useContext) is a technique for passing data down the component tree without having to pass props through components. It is used by creating a provider component and often by creating a Hook to consume the value in a child component.
+The [`useContext` Hook](/reference/react/useContext) is a technique for passing data down the component tree without having to pass props through components. 
+It is used by creating a provider component and often by creating a Hook to consume the value in a child component.
 
 The type of the value provided by the context is inferred from the value passed to the `createContext` call:
 
