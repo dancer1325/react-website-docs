@@ -2,71 +2,58 @@
 title: React Compiler
 ---
 
-<Intro>
-This page will give you an introduction to React Compiler and how to try it out successfully.
-</Intro>
+* goal
+  * introduction to React Compiler
+  * how to try it out successfully
+    * install it & ESLint plugin
 
-<Wip>
-These docs are still a work in progress. More documentation is available in the [React Compiler Working Group repo](https://github.com/reactwg/react-compiler/discussions), and will be upstreamed into these docs when they are more stable.
-</Wip>
+* see [React Compiler Working Group repo](https://github.com/reactwg/react-compiler/discussions)
+  * [introduction](https://github.com/reactwg/react-compiler/discussions/5)
 
-<YouWillLearn>
-
-* Getting started with the compiler
-* Installing the compiler and ESLint plugin
-* Troubleshooting
-
-</YouWillLearn>
-
-<Note>
-React Compiler is a new compiler currently in Beta, that we've open sourced to get early feedback from the community. While it has been used in production at companies like Meta, rolling out the compiler to production for your app will depend on the health of your codebase and how well you’ve followed the [Rules of React](/reference/rules).
-
-The latest Beta release can be found with the `@beta` tag, and daily experimental releases with `@experimental`.
-</Note>
-
-React Compiler is a new compiler that we've open sourced to get early feedback from the community. It is a build-time only tool that automatically optimizes your React app. It works with plain JavaScript, and understands the [Rules of React](/reference/rules), so you don't need to rewrite any code to use it.
-
-The compiler also includes an [ESLint plugin](#installing-eslint-plugin-react-compiler) that surfaces the analysis from the compiler right in your editor. **We strongly recommend everyone use the linter today.** The linter does not require that you have the compiler installed, so you can use it even if you are not ready to try out the compiler.
-
-The compiler is currently released as `beta`, and is available to try out on React 17+ apps and libraries. To install the Beta:
-
-<TerminalBlock>
-npm install -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
-</TerminalBlock>
-
-Or, if you're using Yarn:
-
-<TerminalBlock>
-yarn add -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
-</TerminalBlock>
-
-If you are not using React 19 yet, please see [the section below](#using-react-compiler-with-react-17-or-18) for further instructions.
+* React Compiler
+  * == build-time ONLY tool + [ESLint plugin](#installing-eslint-plugin-react-compiler-installing-eslint-plugin-react-compiler) / 
+    * automatically optimizes your React app
+  * == NEW compiler /
+    * versions
+      * currently in Beta -- `@beta` tag -- 
+        * ways to install
+          ```
+          # NPM
+          npm install -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
+          # YARN
+          yarn add -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
+          ```
+        * AVAILABLE | React v17+
+      * experimental releases -- `@experimental` tag --
+    * open source
+  * use cases
+    * in production | Meta
+  * follows [Rules of React](../reference/rules)
+  * works -- with -- plain JavaScript
 
 ### What does the compiler do? {/*what-does-the-compiler-do*/}
 
-In order to optimize applications, React Compiler automatically memoizes your code. You may be familiar today with memoization through APIs such as `useMemo`, `useCallback`, and `React.memo`. With these APIs you can tell React that certain parts of your application don't need to recompute if their inputs haven't changed, reducing work on updates. While powerful, it's easy to forget to apply memoization or apply them incorrectly. This can lead to inefficient updates as React has to check parts of your UI that don't have any _meaningful_ changes.
+* React Compiler AUTOMATICALLY memoizes your code
+  * -> optimize applications -- via -- 💡specifying parts of your application / NOT need to recompute | their inputs have NOT changed 💡 
+  * -- through APIs --
+    * _Example:_ `useMemo`, `useCallback`, and `React.memo`
+  * how does it work?
+    * -- via the -- knowledge of JS & React's rules
+    * React Compiler detect it statically
 
-The compiler uses its knowledge of JavaScript and React's rules to automatically memoize values or groups of values within your components and hooks. If it detects breakages of the rules, it will automatically skip over just those components or hooks, and continue safely compiling other code.
-
-<Note>
-React Compiler can statically detect when Rules of React are broken, and safely opt-out of optimizing just the affected components or hooks. It is not necessary for the compiler to optimize 100% of your codebase.
-</Note>
-
-If your codebase is already very well-memoized, you might not expect to see major performance improvements with the compiler. However, in practice memoizing the correct dependencies that cause performance issues is tricky to get right by hand.
-
-<DeepDive>
 #### What kind of memoization does React Compiler add? {/*what-kind-of-memoization-does-react-compiler-add*/}
 
-The initial release of React Compiler is primarily focused on **improving update performance** (re-rendering existing components), so it focuses on these two use cases:
-
 1. **Skipping cascading re-rendering of components**
-    * Re-rendering `<Parent />` causes many components in its component tree to re-render, even though only `<Parent />` has changed
-1. **Skipping expensive calculations from outside of React**
-    * For example, calling `expensivelyProcessAReallyLargeArrayOfObjects()` inside of your component or hook that needs that data
+   * Reason: 🧠Re-rendering `<Parent />` -> MANY child components re-render 🧠
+1. **Skipping expensive calculations OUTSIDE of React**
+    * _Example of expensive calculations:_ call `expensivelyProcessAReallyLargeArrayOfObjects()` | your component or hook
 
 #### Optimizing Re-renders {/*optimizing-re-renders*/}
 
-React lets you express your UI as a function of their current state (more concretely: their props, state, and context). In its current implementation, when a component's state changes, React will re-render that component _and all of its children_ — unless you have applied some form of manual memoization with `useMemo()`, `useCallback()`, or `React.memo()`. For example, in the following example, `<MessageButton>` will re-render whenever `<FriendList>`'s state changes:
+* TODO:
+React lets you express your UI as a function of their current state (more concretely: their props, state, and context).
+In its current implementation, when a component's state changes, React will re-render that component _and all of its children_ — unless you have applied some form of manual memoization with `useMemo()`, `useCallback()`, or `React.memo()`. 
+For example, in the following example, `<MessageButton>` will re-render whenever `<FriendList>`'s state changes:
 
 ```javascript
 function FriendList({ friends }) {
@@ -87,7 +74,8 @@ function FriendList({ friends }) {
 ```
 [_See this example in the React Compiler Playground_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
 
-React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". In the above example, React Compiler determines that the return value of `<FriendListCard />` can be reused even as `friends` changes, and can avoid recreating this JSX _and_ avoid re-rendering `<MessageButton>` as the count changes.
+React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". 
+In the above example, React Compiler determines that the return value of `<FriendListCard />` can be reused even as `friends` changes, and can avoid recreating this JSX _and_ avoid re-rendering `<MessageButton>` as the count changes.
 
 #### Expensive calculations also get memoized {/*expensive-calculations-also-get-memoized*/}
 
@@ -111,7 +99,8 @@ However, if `expensivelyProcessAReallyLargeArrayOfObjects` is truly an expensive
 - React Compiler only memoizes React components and hooks, not every function
 - React Compiler's memoization is not shared across multiple components or hooks
 
-So if `expensivelyProcessAReallyLargeArrayOfObjects` was used in many different components, even if the same exact items were passed down, that expensive calculation would be run repeatedly. We recommend [profiling](https://react.dev/reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive) first to see if it really is that expensive before making code more complicated.
+So if `expensivelyProcessAReallyLargeArrayOfObjects` was used in many different components, even if the same exact items were passed down, that expensive calculation would be run repeatedly. 
+We recommend [profiling](https://react.dev/reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive) first to see if it really is that expensive before making code more complicated.
 </DeepDive>
 
 ### Should I try out the compiler? {/*should-i-try-out-the-compiler*/}
@@ -364,6 +353,7 @@ function SuspiciousComponent() {
 ```
 
 <Note>
+
 #### `"use no memo"` {/*use-no-memo*/}
 
 `"use no memo"` is a _temporary_ escape hatch that lets you opt-out components and hooks from being compiled by the React Compiler. This directive is not meant to be long lived the same way as eg [`"use client"`](/reference/rsc/use-client) is.
@@ -375,4 +365,4 @@ When you make the error go away, confirm that removing the opt out directive mak
 
 ### Other issues {/*other-issues*/}
 
-Please see https://github.com/reactwg/react-compiler/discussions/7.
+* see https://github.com/reactwg/react-compiler/discussions/7
