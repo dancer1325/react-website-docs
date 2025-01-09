@@ -11,16 +11,6 @@ title: Passing Props to a Component
   * ALLOWED values / pass -- through -- them
     * ANY JS value (objects, arrays, functions)
 
-<YouWillLearn>
-
-* How to pass props to a component
-* How to read props from a component
-* How to specify default values for props
-* How to pass some JSX to a component
-* How props change over time
-
-</YouWillLearn>
-
 ## Familiar props {/*familiar-props*/}
 
 * _Example:_ `className`, `src`, `alt`, `width`, `height`
