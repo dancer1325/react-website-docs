@@ -21,43 +21,14 @@
 * LEARN REACT
   * [Describing the UI](describing-the-ui.md)
     * [Your First Component](your-first-component.md)
-                "path": "/learn/"
-              },
-              {
-                "title": "Importing and Exporting Components",
-                "path": "/learn/importing-and-exporting-components"
-              },
-              {
-                "title": "Writing Markup with JSX",
-                "path": "/learn/writing-markup-with-jsx"
-              },
-              {
-                "title": "JavaScript in JSX with Curly Braces",
-                "path": "/learn/javascript-in-jsx-with-curly-braces"
-              },
-              {
-                "title": "Passing Props to a Component",
-                "path": "/learn/passing-props-to-a-component"
-              },
-              {
-                "title": "Conditional Rendering",
-                "path": "/learn/conditional-rendering"
-              },
-              {
-                "title": "Rendering Lists",
-                "path": "/learn/rendering-lists"
-              },
-              {
-                "title": "Keeping Components Pure",
-                "path": "/learn/keeping-components-pure"
-              },
-              {
-                "title": "Your UI as a Tree",
-                "path": "/learn/understanding-your-ui-as-a-tree"
-              }
-            ]
-          },
-          {
+    * [Importing and Exporting Components](importing-and-exporting-components)
+    * [Writing Markup with JSX](writing-markup-with-jsx.md)
+    * [JavaScript in JSX with Curly Braces](javascript-in-jsx-with-curly-braces.md)
+    * [Passing Props to a Component](passing-props-to-a-component.md)
+    * [Conditional Rendering](conditional-rendering.md)
+    * [Rendering Lists](rendering-lists.md)
+    * [Keeping Components Pure](keeping-components-pure.md)
+    * [Your UI as a Tree](understanding-your-ui-as-a-tree.md)
   * [Adding Interactivity](adding-interactivity.md)
     * [Responding to Events](responding-to-events.md)
     * [State: A Component's Memory](state-a-components-memory.md)
