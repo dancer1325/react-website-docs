@@ -6,6 +6,9 @@
 ## How was it created?
 
 * `npx create-react-app adding-interactivity`
+* `npm install immer use-immer`
+  * [immer](https://github.com/immerjs/use-immer)
+  * helps copying objects
 
 ## How to run?
 

@@ -1,16 +1,5 @@
-import './App.css';
-
-export default function App() {
-  return (
-    <Toolbar
-      onPlayMovie={() => alert('Playing!')}
-      onUploadImage={() => alert('Uploading!')}
-    />
-  );
-}
-
 // { onPlayMovie, onUploadImage }     ==    object destructuring
-function Toolbar({ onPlayMovie, onUploadImage }) {
+export default function Toolbar({ onPlayMovie, onUploadImage }) {
   return (
     <div>
       <Button onClick={onPlayMovie}>
