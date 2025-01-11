@@ -18,7 +18,7 @@ title: "Common components (e.g. <div>)"
 
 #### Props {/*common-props*/}
 
-* React props / supported for ALL built-in components
+* React props / supported for ALL built-in components == 👀COMMON props 👀
   * `children`
     * 👀:= content | React component 👀
     * == React node / ALLOWS
