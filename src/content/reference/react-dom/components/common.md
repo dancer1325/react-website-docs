@@ -45,21 +45,58 @@ title: "Common components (e.g. <div>)"
             <div children={<span>Hello</span>} />
             ```
   * `dangerouslySetInnerHTML`
-    * TODO:
-    * An object of the form `{ __html: '<p>some html</p>' }` with a raw HTML string inside. 
-    * Overrides the [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) property of the DOM node and displays the passed HTML inside. 
-    * This should be used with extreme caution! If the HTML inside isn't trusted (for example, if it's based on user data), you risk introducing an [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerability.
-    * [Read more about using `dangerouslySetInnerHTML`.](#dangerously-setting-the-inner-html)
+    * == object / 's content == raw HTML string of the form
+      * 👀overrides the DOM node's [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) property 👀 
+    * uses
+      * ⚠️with EXTREME caution ⚠️
+      * see [uses of `dangerouslySetInnerHTML`.](#dangerously-setting-the-inner-html-dangerously-setting-the-inner-html)
+    * if the HTML inside is NOT trusted (_Example:_ based on user data) -> it could introduce an [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerability
   * `ref`
-    * A ref object from [`useRef`](/reference/react/useRef) or [`createRef`](/reference/react/createRef), or a [`ref` callback function,](#ref-callback) or a string for [legacy refs.](https://reactjs.org/docs/refs-and-the-dom.html#legacy-api-string-refs) Your ref will be filled with the DOM element for this node. [Read more about manipulating the DOM with refs.](#manipulating-a-dom-node-with-a-ref)
+    * allows
+      * accessing DOM nodes or React elements directly
+    * ALLOWED 
+      * reference objects
+        * [`useRef`](../../react/useRef)
+        * [`createRef`](../../react/createRef)
+      * [`ref` callback function,](#ref-callback-function-ref-callback)
+      * string for [legacy refs](/src/content/learn/manipulating-the-dom-with-refs.md)
+    * see [MORE here](#manipulating-a-dom-node-with-a-ref-manipulating-a-dom-node-with-a-ref)
   * `suppressContentEditableWarning`
-    * A boolean. If `true`, suppresses the warning that React shows for elements that both have `children` and `contentEditable={true}` (which normally do not work together). Use this if you're building a text input library that manages the `contentEditable` content manually.
+    * == boolean
+      * if == `true` -> suppresses the warning that React shows for elements that both have `children` and `contentEditable={true}` (which normally do not work together). 
+    * use cases
+      * if you're building a text input library / manages the `contentEditable` content manually
   * `suppressHydrationWarning`
-    * A boolean. If you use [server rendering,](/reference/react-dom/server) normally there is a warning when the server and the client render different content. In some rare cases (like timestamps), it is very hard or impossible to guarantee an exact match. If you set `suppressHydrationWarning` to `true`, React will not warn you about mismatches in the attributes and the content of that element. It only works one level deep, and is intended to be used as an escape hatch. Don't overuse it. [Read about suppressing hydration errors.](/reference/react-dom/client/hydrateRoot#suppressing-unavoidable-hydration-mismatch-errors)
+    * == boolean 
+      * if `true` -> React will NOT warn you about mismatches of attributes -- & -- content of that element
+    * ⚠️if you use [server rendering](../server) & (content / render by server) != (content / render by client) -> NORMALLY, there is a warning ⚠️   
+      * COMMON use cases
+        * timestamps
+    * uses
+      * ONLY works 1 level deep
+      * as an escape hatch 
+    * recommendations
+      * ❌NOT overuse it ❌ 
+    * see [suppressing hydration errors](/reference/react-dom/client/hydrateRoot#suppressing-unavoidable-hydration-mismatch-errors)
   * `style`
-    * An object with CSS styles, for example `{ fontWeight: 'bold', margin: 20 }`. Similarly to the DOM [`style`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property, the CSS property names need to be written as `camelCase`, for example `fontWeight` instead of `font-weight`. You can pass strings or numbers as values. If you pass a number, like `width: 100`, React will automatically append `px` ("pixels") to the value unless it's a [unitless property.](https://github.com/facebook/react/blob/81d4ee9ca5c405dce62f64e61506b8e155f38d8d/packages/react-dom-bindings/src/shared/CSSProperty.js#L8-L57) We recommend using `style` only for dynamic styles where you don't know the style values ahead of time. In other cases, applying plain CSS classes with `className` is more efficient. [Read more about `className` and `style`.](#applying-css-styles)
+    * == object / contains CSS styles
+      * ' formatting camelCase
+        ```
+        { fontWeight: 'bold', margin: 20 }
+        ```
+      * ' entry's values == strings or numbers
+        * if you pass a number & ![unitless property.](https://github.com/facebook/react/blob/81d4ee9ca5c405dce62f64e61506b8e155f38d8d/packages/react-dom-bindings/src/shared/CSSProperty.js#L8-L57)= -> React will automatically append `px` ("pixels")
+          ```
+          width: 100 (== width: 100px)
+          ```
+    * recommendations
+      * dynamic styles / you do NOT know the style values ahead of time
+        * Reason: 🧠 |OTHER cases, MORE efficient to use `className` 🧠 
+    * see [MORE about `className` and `style`](#applying-css-styles-applying-css-styles)
 
-These standard DOM props are also supported for all built-in components:
+* STANDARD DOM props
+  * supported for ALL built-in components
+  * TODO:
 
 * [`accessKey`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey): A string. Specifies a keyboard shortcut for the element. [Not generally recommended.](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#accessibility_concerns)
 * [`aria-*`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes): ARIA attributes let you specify the accessibility tree information for this element. See [ARIA attributes](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes) for a complete reference. In React, all ARIA attribute names are exactly the same as in HTML.
@@ -176,7 +213,11 @@ These standard DOM props are also supported for all built-in components:
 * [`title`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title): A string. Specifies the tooltip text for the element.
 * [`translate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/translate): Either `'yes'` or `'no'`. Passing `'no'` excludes the element content from being translated.
 
-You can also pass custom attributes as props, for example `mycustomprop="someValue"`. This can be useful when integrating with third-party libraries. The custom attribute name must be lowercase and must not start with `on`. The value will be converted to a string. If you pass `null` or `undefined`, the custom attribute will be removed.
+You can also pass custom attributes as props, for example `mycustomprop="someValue"`.
+This can be useful when integrating with third-party libraries. 
+The custom attribute name must be lowercase and must not start with `on`.
+The value will be converted to a string. 
+If you pass `null` or `undefined`, the custom attribute will be removed.
 
 These events fire only for the [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) elements:
 
