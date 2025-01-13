@@ -350,34 +350,38 @@ React will also call your `ref` callback whenever you pass a *different* `ref` c
 
 ### React event object {/*react-event-object*/}
 
-Your event handlers will receive a *React event object.* It is also sometimes known as a "synthetic event".
+* React event object
+  * uses
+    * 👀-- received by -- YOUR [event handlers](#event-handler-function-event-handler) 👀
+  * == DOM events-related + SOME browser inconsistencies fixed
+    * ❌-- NOT map directly to the -- browser's native events ❌
+      * _Example:_  in `onMouseLeave`, `e.nativeEvent` will point to a `mouseout` event
+        The specific mapping is not part of the public API and may change in the future.
+        If you need the underlying browser event for some reason, read it from `e.nativeEvent`.
 
-```js
-<button onClick={e => {
-  console.log(e); // React event object
-}} />
-```
-
-It conforms to the same standard as the underlying DOM events, but fixes some browser inconsistencies.
-
-Some React events do not map directly to the browser's native events. For example in `onMouseLeave`, `e.nativeEvent` will point to a `mouseout` event. The specific mapping is not part of the public API and may change in the future. If you need the underlying browser event for some reason, read it from `e.nativeEvent`.
+* event handlers
+  * ALSO known as a "synthetic event"
 
 #### Properties {/*react-event-object-properties*/}
 
-React event objects implement some of the standard [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) properties:
+* implement SOME of the standard [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) properties
+  * [`bubbles`](https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles)
+    * == boolean
+    * TODO: Returns whether the event bubbles through the DOM. 
+  * [`cancelable`](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable)
+    * == boolean
+    * Returns whether the event can be canceled.
+  * [`currentTarget`](https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget): A DOM node. Returns the node to which the current handler is attached in the React tree.
+  * [`defaultPrevented`](https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented): A boolean. Returns whether `preventDefault` was called.
+  * [`eventPhase`](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase): A number. Returns which phase the event is currently in.
+  * [`isTrusted`](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted): A boolean. Returns whether the event was initiated by user.
+  * [`target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target): A DOM node. Returns the node on which the event has occurred (which could be a distant child).
+  * [`timeStamp`](https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp): A number. Returns the time when the event occurred.
 
-* [`bubbles`](https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles): A boolean. Returns whether the event bubbles through the DOM. 
-* [`cancelable`](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable): A boolean. Returns whether the event can be canceled.
-* [`currentTarget`](https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget): A DOM node. Returns the node to which the current handler is attached in the React tree.
-* [`defaultPrevented`](https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented): A boolean. Returns whether `preventDefault` was called.
-* [`eventPhase`](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase): A number. Returns which phase the event is currently in.
-* [`isTrusted`](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted): A boolean. Returns whether the event was initiated by user.
-* [`target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target): A DOM node. Returns the node on which the event has occurred (which could be a distant child).
-* [`timeStamp`](https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp): A number. Returns the time when the event occurred.
-
-Additionally, React event objects provide these properties:
-
-* `nativeEvent`: A DOM [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event). The original browser event object.
+* ADDITIONAL properties
+  * `nativeEvent`
+    * == DOM [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event)
+    * == original browser event object
 
 #### Methods {/*react-event-object-methods*/}
 
@@ -542,11 +546,12 @@ An event handler type for the focus events.
 
 ### `Event` handler function {/*event-handler*/}
 
-An event handler type for generic events.
+* == event handler type -- for -- generic events
 
 #### Parameters {/*event-handler-parameters*/}
 
-* `e`: A [React event object](#react-event-object) with no additional properties.
+* `e`
+  * := [React event object](#react-event-object-react-event-object) / NO ADDITIONAL properties
 
 ---
 
