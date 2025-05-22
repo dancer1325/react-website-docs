@@ -2,15 +2,14 @@
 title: React DOM APIs
 ---
 
-<Intro>
-
-The `react-dom` package contains methods that are only supported for the web applications (which run in the browser DOM environment). They are not supported for React Native.
-
-</Intro>
-
----
+* `react-dom` package
+  * == methods / supported by
+    * web applications (== / run | browser DOM environment)
+    * ❌NOT by React Native ❌
 
 ## APIs {/*apis*/}
+
+* TODO:
 
 These APIs can be imported from your components. They are rarely used:
 

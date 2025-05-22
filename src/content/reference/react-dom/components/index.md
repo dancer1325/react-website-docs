@@ -2,26 +2,22 @@
 title: "React DOM Components"
 ---
 
-<Intro>
-
-React supports all of the browser built-in [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components.
-
-</Intro>
-
----
+* React supports ALL browser built-in
+  * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) components
+  * [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components
 
 ## Common components {/*common-components*/}
 
-All of the built-in browser components support some props and events.
+* ALL built-in browser components support SOME
+  * props
+    * _Example:_ `ref`, `dangerouslySetInnerHTML` 
+  * events
 
-* [Common components (e.g. `<div>`)](/reference/react-dom/components/common)
-
-This includes React-specific props like `ref` and `dangerouslySetInnerHTML`.
-
----
+* see [here](common.md)
 
 ## Form components {/*form-components*/}
 
+* TODO:
 These built-in browser components accept user input:
 
 * [`<input>`](/reference/react-dom/components/input)
@@ -46,9 +42,7 @@ They are special in React because React can render them into the document head, 
 
 ---
 
-## All HTML components {/*all-html-components*/}
-
-React supports all built-in browser HTML components. This includes:
+## ALL HTML components / supported by React{/*all-html-components*/} 
 
 * [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)
 * [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
@@ -154,7 +148,9 @@ React supports all built-in browser HTML components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
+Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. 
+For example, you'll write `tabIndex` instead of `tabindex`.
+You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
 
 </Note>
 
