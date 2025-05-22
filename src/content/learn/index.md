@@ -58,19 +58,9 @@
               {
   * [Managing State](managing-state.md)
     * [Reacting to Input with State](reacting-to-input-with-state.md)
-    * 
-                        "path": "/learn/"
-                      },
-                      {
-                        "title": "Choosing the State Structure",
-                        "path": "/learn/choosing-the-state-structure"
-                      },
-                      {
-                        "title": "Sharing State Between Components",
-                        "path": "/learn/sharing-state-between-components"
-                      },
-                      {
-                        "title": "Preserving and Resetting State",
+    * [Choosing the State Structure](choosing-the-state-structure.md)
+    * [Sharing State Between Components](sharing-state-between-components.md)
+    *                   "title": "Preserving and Resetting State",
                         "path": "/learn/preserving-and-resetting-state"
                       },
                       {
