@@ -2,21 +2,16 @@
 title: Preserving and Resetting State
 ---
 
-* TODO:
+* goal
+  * how does React choose to preserve or reset the state?
+  * how to force React -- to -- reset component's state?
+  * how keys & types affect whether the state is preserved
 
-<Intro>
 
-State is isolated between components. React keeps track of which state belongs to which component based on their place in the UI tree. You can control when to preserve state and when to reset it between re-renders.
+* State
+  * is isolated BETWEEN components
+  * TODO: React keeps track of which state belongs to which component based on their place in the UI tree. You can control when to preserve state and when to reset it between re-renders.
 
-</Intro>
-
-<YouWillLearn>
-
-* When React chooses to preserve or reset the state
-* How to force React to reset component's state
-* How keys and types affect whether the state is preserved
-
-</YouWillLearn>
 
 ## State is tied to a position in the render tree {/*state-is-tied-to-a-position-in-the-tree*/}
 

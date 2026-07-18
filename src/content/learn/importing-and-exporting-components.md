@@ -26,7 +26,7 @@ title: Importing and Exporting Components
   * 1! `export default`
   * SEVERAL named export
   * 1 export default + SEVERAL named export
-  ![Default and named exports](/public/images/docs/illustrations/i_import-export.svg)
+  ![Default and named exports](../../../public/images/docs/illustrations/i_import-export.svg)
 
 * ⚠️based on way to export -> dictates how you MUST import it ⚠️
   * if you use 

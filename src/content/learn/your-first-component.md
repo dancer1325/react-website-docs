@@ -6,10 +6,6 @@ title: Your First Component
   * == core concepts of React
   * == foundation -- to build -- UI
 
-* What a component is
-* What role components play in a React application
-* How to write your first React component
-
 ## Components: UI building blocks {/*components-ui-building-blocks*/}
 
 * | Web,
@@ -48,7 +44,7 @@ title: Your First Component
 
 ### Step 2: Define the function {/*step-2-define-the-function*/}
 
-* requirements
+* ⚠️requirements⚠️
   * FIRST capital letter
 
 ## Using a component {/*using-a-component*/}
@@ -64,8 +60,8 @@ title: Your First Component
 * "root" component
   * NORMALLY, created automatically | start a NEW project
 
-* components ALL the way down
-  * == components are ALSO used for larger pieces (_Example:_ sidebars, lists, and COMPLETE pages) 
+* ALL are React components
+  * _Example:_ sidebars, lists, footers ... 
 
 * [React-based frameworks](start-a-new-react-project)
   * generate AUTOMATICALLY -- from your React components, the -- HTML  / != empty HTML file
