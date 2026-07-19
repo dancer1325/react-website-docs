@@ -1,5 +1,5 @@
 import './App.css';
-import {MockedForm, MockedMoreFunctionalityForm, Form} from "./Form";
+import {MockedForm, MockedMoreFunctionalityForm, FormSteps2to5, FormFinal} from "./Form";
 
 let statuses = [
   'empty',
@@ -12,13 +12,12 @@ let statuses = [
 function App() {
   return (
       <>
-        <h1>Step 1</h1>
+        <h1>Step 1: Identify visual states (mocks)</h1>
         <MockedForm/>
         <br/>
         <MockedMoreFunctionalityForm/>
 
         <p>Displaying MANY visual states at once</p>
-        {/*Displaying MANY visual states at once*/}
         {statuses.map(status => (
             <section key={status}>
               <h4>Form ({status}):</h4>
@@ -26,8 +25,11 @@ function App() {
             </section>
         ))}
 
-        <h1>Step 2: Triggers of state changes</h1>
-        <Form />
+        <h1>Steps 2-5: Triggers + state + remove redundant + connect event handlers</h1>
+        <FormSteps2to5/>
+
+        <h1>Final: Step 4 FULLY applied (removed 'empty' state)</h1>
+        <FormFinal/>
       </>
 
   );

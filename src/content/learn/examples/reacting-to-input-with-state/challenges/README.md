@@ -2,66 +2,36 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Steps to think about declaratively
-### Step 1: Identify your component's different visual states
+## Challenge1
 
-* ALLOWED UI states / user might see
-  * **Empty**
-    * -> disabled "Submit" button
-  * **Typing**
-    * -> Form has an enabled "Submit" button
-  * **Submitting**
-    * Form is COMPLETELY disabled
-    * Spinner is shown
-  * **Success**
-    * "Thank you" message is shown
-  * **Error**
-    * == Typing state + error message
+* goal
+  * | click | picture,
+    * remove the purple background
+    * highlight the picture border
+  * | click | outside the picture,
+    * highlights the background
+    * removes the picture border highlight
 
-#### Displaying MANY visual states at once
+* Component's 
+  * visual states
+    * image / active
+      * -> CSS classes
+        * `background`
+        * `picture picture--active`
+    * image / inactive
+      * -> CSS classes
+        * `background background--active` 
+        * `picture`
+  * ' state variables
+    * 1 / check whether the image is active
 
-* [here](src/App.js)
+## Challenge2
 
-### Step 2: Determine what triggers those state changes
+* goal
+  * reimplement plain JS & DOM -- to -- React
 
-* state changes
-  * Empty -> Typing
-    * -- via -- changing the text input
-      * human
-  * Typing -> Submitting
-    * -- via -- clicking the Submit button
-      * human
-  * Submitting -> Success
-    * -- via -- successful network response
-      * computer
-  * Submitting -> Failed
-    * -- via -- failed network response
-      * computer
-
-![](../transitionBetweenStates.png)
-
-### Step 3: Represent the state in memory -- via -- `useState`
-
-* FIRST attempt
-  * 1 `useState` / EACH ALLOWED UI state
-* PROPER solution
-  * less `useState` POSSIBLE
-
-### Step 4: Remove ANY NON-essential state variables
-
-* questions to wonder about state variables
-  * **Does this state cause a paradox?**
-    * _Example of paradox:_ `isTyping = true` & `isSubmitting = true`
-  * **Is the SAME information AVAILABLE | ANOTHER variable ALREADY?**
-    * | SAME time, `isEmpty = true` & `isTyping = true`
-    * remove `isEmpty` & check `answer.length === 0`
-  * **Can you get the SAME information -- from the -- inverse of ANOTHER state variable?**
-    * `isError` is NOT needed
-      * Reason: `isError` == `error !== null`
-
-#### Eliminating “impossible” states with a reducer
-
-* NO sense: `error` + `status = 'success'`
+* | Create React App,
+  * place static files | "/public"
 
 ## Available Scripts
 

@@ -2,22 +2,17 @@
 title: Render and Commit
 ---
 
-<Intro>
+* goal
+  * rendering | React
+  * when & why React renders a component
 
-Before your components are displayed on screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+* render
+  * == process /
+    * happens BEFORE displaying the components | screen
 
-</Intro>
-
-<YouWillLearn>
-
-* What rendering means in React
-* When and why React renders a component
-* The steps involved in displaying a component on screen
-* Why rendering does not always produce a DOM update
-
-</YouWillLearn>
-
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients
+* In this scenario, React is the waiter who puts in requests from customers and brings them their orders
+* This process of requesting and serving UI has three steps:
 
 1. **Triggering** a render (delivering the guest's order to the kitchen)
 2. **Rendering** the component (preparing the order in the kitchen)

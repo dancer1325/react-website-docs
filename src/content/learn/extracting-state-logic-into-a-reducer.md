@@ -2,24 +2,17 @@
 title: Extracting State Logic into a Reducer
 ---
 
-<Intro>
+* goal
+  * reducer function
+  * how to refactor `useState` -- to -- `useReducer`
 
-Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called a _reducer._
-
-</Intro>
-
-<YouWillLearn>
-
-- What a reducer function is
-- How to refactor `useState` to `useReducer`
-- When to use a reducer
-- How to write one well
-
-</YouWillLearn>
+Components with many state updates spread across many event handlers can get overwhelming
+* For these cases, you can consolidate all the state update logic outside your component in a single function, called a _reducer._
 
 ## Consolidate state logic with a reducer {/*consolidate-state-logic-with-a-reducer*/}
 
-As your components grow in complexity, it can get harder to see at a glance all the different ways in which a component's state gets updated. For example, the `TaskApp` component below holds an array of `tasks` in state and uses three different event handlers to add, remove, and edit tasks:
+As your components grow in complexity, it can get harder to see at a glance all the different ways in which a component's state gets updated
+* For example, the `TaskApp` component below holds an array of `tasks` in state and uses three different event handlers to add, remove, and edit tasks:
 
 <Sandpack>
 
@@ -179,9 +172,12 @@ li {
 
 </Sandpack>
 
-Each of its event handlers calls `setTasks` in order to update the state. As this component grows, so does the amount of state logic sprinkled throughout it. To reduce this complexity and keep all your logic in one easy-to-access place, you can move that state logic into a single function outside your component, **called a "reducer".**
+Each of its event handlers calls `setTasks` in order to update the state
+* As this component grows, so does the amount of state logic sprinkled throughout it
+* To reduce this complexity and keep all your logic in one easy-to-access place, you can move that state logic into a single function outside your component, **called a "reducer".**
 
-Reducers are a different way to handle state. You can migrate from `useState` to `useReducer` in three steps:
+Reducers are a different way to handle state
+* You can migrate from `useState` to `useReducer` in three steps:
 
 1. **Move** from setting state to dispatching actions.
 2. **Write** a reducer function.
@@ -220,13 +216,17 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-Remove all the state setting logic. What you are left with are three event handlers:
+Remove all the state setting logic
+* What you are left with are three event handlers:
 
 - `handleAddTask(text)` is called when the user presses "Add".
 - `handleChangeTask(task)` is called when the user toggles a task or presses "Save".
 - `handleDeleteTask(taskId)` is called when the user presses "Delete".
 
-Managing state with reducers is slightly different from directly setting state. Instead of telling React "what to do" by setting state, you specify "what the user just did" by dispatching "actions" from your event handlers. (The state update logic will live elsewhere!) So instead of "setting `tasks`" via an event handler, you're dispatching an "added/changed/deleted a task" action. This is more descriptive of the user's intent.
+Managing state with reducers is slightly different from directly setting state
+* Instead of telling React "what to do" by setting state, you specify "what the user just did" by dispatching "actions" from your event handlers
+* (The state update logic will live elsewhere!) So instead of "setting `tasks`" via an event handler, you're dispatching an "added/changed/deleted a task" action
+* This is more descriptive of the user's intent.
 
 ```js
 function handleAddTask(text) {
@@ -266,13 +266,17 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-It is a regular JavaScript object. You decide what to put in it, but generally it should contain the minimal information about _what happened_. (You will add the `dispatch` function itself in a later step.)
+It is a regular JavaScript object
+* You decide what to put in it, but generally it should contain the minimal information about _what happened_
+* (You will add the `dispatch` function itself in a later step.)
 
 <Note>
 
 An action object can have any shape.
 
-By convention, it is common to give it a string `type` that describes what happened, and pass any additional information in other fields. The `type` is specific to a component, so in this example either `'added'` or `'added_task'` would be fine. Choose a name that says what happened!
+By convention, it is common to give it a string `type` that describes what happened, and pass any additional information in other fields
+* The `type` is specific to a component, so in this example either `'added'` or `'added_task'` would be fine
+* Choose a name that says what happened!
 
 ```js
 dispatch({
@@ -286,7 +290,8 @@ dispatch({
 
 ### Step 2: Write a reducer function {/*step-2-write-a-reducer-function*/}
 
-A reducer function is where you will put your state logic. It takes two arguments, the current state and the action object, and it returns the next state:
+A reducer function is where you will put your state logic
+* It takes two arguments, the current state and the action object, and it returns the next state:
 
 ```js
 function yourReducer(state, action) {
@@ -335,7 +340,8 @@ Because the reducer function takes state (`tasks`) as an argument, you can **dec
 
 <Note>
 
-The code above uses if/else statements, but it's a convention to use [switch statements](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) inside reducers. The result is the same, but it can be easier to read switch statements at a glance.
+The code above uses if/else statements, but it's a convention to use [switch statements](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) inside reducers
+* The result is the same, but it can be easier to read switch statements at a glance.
 
 We'll be using them throughout the rest of this documentation like so:
 
@@ -371,7 +377,9 @@ function tasksReducer(tasks, action) {
 }
 ```
 
-We recommend wrapping each `case` block into the `{` and `}` curly braces so that variables declared inside of different `case`s don't clash with each other. Also, a `case` should usually end with a `return`. If you forget to `return`, the code will "fall through" to the next `case`, which can lead to mistakes!
+We recommend wrapping each `case` block into the `{` and `}` curly braces so that variables declared inside of different `case`s don't clash with each other
+* Also, a `case` should usually end with a `return`
+* If you forget to `return`, the code will "fall through" to the next `case`, which can lead to mistakes!
 
 If you're not yet comfortable with switch statements, using if/else is completely fine.
 
@@ -392,7 +400,8 @@ const sum = arr.reduce(
 ); // 1 + 2 + 3 + 4 + 5
 ```
 
-The function you pass to `reduce` is known as a "reducer". It takes the _result so far_ and the _current item,_ then it returns the _next result._ React reducers are an example of the same idea: they take the _state so far_ and the _action_, and return the _next state._ In this way, they accumulate actions over time into state.
+The function you pass to `reduce` is known as a "reducer"
+* It takes the _result so far_ and the _current item,_ then it returns the _next result._ React reducers are an example of the same idea: they take the _state so far_ and the _action_, and return the _next state._ In this way, they accumulate actions over time into state.
 
 You could even use the `reduce()` method with an `initialState` and an array of `actions` to calculate the final state by passing your reducer function to it:
 
@@ -459,7 +468,8 @@ You probably won't need to do this yourself, but this is similar to what React d
 
 ### Step 3: Use the reducer from your component {/*step-3-use-the-reducer-from-your-component*/}
 
-Finally, you need to hook up the `tasksReducer` to your component. Import the `useReducer` Hook from React:
+Finally, you need to hook up the `tasksReducer` to your component
+* Import the `useReducer` Hook from React:
 
 ```js
 import { useReducer } from 'react';
@@ -477,7 +487,8 @@ with `useReducer` like so:
 const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 ```
 
-The `useReducer` Hook is similar to `useState`—you must pass it an initial state and it returns a stateful value and a way to set state (in this case, the dispatch function). But it's a little different.
+The `useReducer` Hook is similar to `useState`—you must pass it an initial state and it returns a stateful value and a way to set state (in this case, the dispatch function)
+* But it's a little different.
 
 The `useReducer` Hook takes two arguments:
 
@@ -862,7 +873,8 @@ li {
 
 </Sandpack>
 
-Component logic can be easier to read when you separate concerns like this. Now the event handlers only specify _what happened_ by dispatching actions, and the reducer function determines _how the state updates_ in response to them.
+Component logic can be easier to read when you separate concerns like this
+* Now the event handlers only specify _what happened_ by dispatching actions, and the reducer function determines _how the state updates_ in response to them.
 
 ## Comparing `useState` and `useReducer` {/*comparing-usestate-and-usereducer*/}
 

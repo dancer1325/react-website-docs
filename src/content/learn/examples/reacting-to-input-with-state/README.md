@@ -12,3 +12,6 @@
 * [Form.js](declarative/src/Form.js) 
 ### == declare what to show / React figures out how to update the UI
 * [Form.js](declarative/src/Form.js)
+
+# Thinking about UI declaratively
+* [here](declarative)
