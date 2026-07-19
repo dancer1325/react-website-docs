@@ -2,38 +2,19 @@
 title: useState
 ---
 
-
-
 * `useState` 
-  * := React's Hook / 👀lets you declare a state variable 👀
-  * `useState(initialValue): [currentState, setterFunctionToUpdateState]`
-    * AFTER `:` == returned
-
-    ```js
-    const [index, setIndex] = useState(0);
-    const [showMore, setShowMore] = useState(false);
-    ```
-
-
-* TODO:
-<Intro>
-
-`useState` is a React Hook that lets you add a [state variable](/learn/state-a-components-memory) to your component.
-
-```js
-const [state, setState] = useState(initialState)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+  * := React's Hook / 
+    * 👀lets you
+      * add a [state variable](../../learn/state-a-components-memory.md) | React component 👀
+  * `useState(initialValue)`
+    * 's return
+      * `[currentState, setterFunctionToUpdateState]`
 
 ## Reference {/*reference*/}
 
 ### `useState(initialState)` {/*usestate*/}
 
+* TODO:
 Call `useState` at the top level of your component to declare a [state variable.](/learn/state-a-components-memory)
 
 ```js

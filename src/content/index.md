@@ -5,7 +5,7 @@ permalink: index.html
 ---
 
 * React
-  * := **Library** for UIs web & native mobile
+  * := JS Library -- for -- building UIs web & native mobile
     * != framework
     * native mobile
       * -- via -- [React Native](https://reactnative.dev/)
@@ -16,6 +16,12 @@ permalink: index.html
       * ⚠️ If you want to build an entire full-stack React application, you can use a framework ⚠️
         * [Next.js](https://nextjs.org/)
         * [Remix](https://remix.run/)
+    * is
+      * [Declarative](learn/reacting-to-input-with-state.md)
+      * **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs
+        * Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep the state out of the DOM.
+      * **Learn Once, Write Anywhere:** We don't make asssumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code
+        * React can also render on the server using [Node](https://nodejs.org/en) and power mobile apps using [React Native](https://reactnative.dev/).
 
 * React Components
   * := 👀 individual pieces ([button, entire page]) 👀 (=== | 1! file) / OWN

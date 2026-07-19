@@ -2,354 +2,78 @@
 title: Reacting to Input with State
 ---
 
-<Intro>
+* goal
+  * declarative UI vs imperative UI
+  * your component's visual states
 
-React provides a declarative way to manipulate the UI. Instead of manipulating individual pieces of the UI directly, you describe the different states that your component can be in, and switch between them in response to the user input. This is similar to how designers think about the UI.
+* React 
+  * 's approach
+    * define the UI declaratively + DIFFERENT ALLOWED states /
+      * switch BETWEEN states -- based on -- user input
 
-</Intro>
+## declarative UI vs imperative UI {/*how-declarative-ui-compares-to-imperative*/}
 
-<YouWillLearn>
+* imperative
+  * how to update the UI -- based on -- user actions
+  * use cases
+    * simple examples
 
-* How declarative UI programming differs from imperative UI programming
-* How to enumerate the different visual states your component can be in
-* How to trigger the changes between the different visual states from code
+  ![](../../../public/images/docs/illustrations/i_imperative-ui-programming.png)
+ 
+* 💡declarative💡
+  * != manipulate the UI-meaning
+  * == declare what to show /
+    * React figures out how to update the UI
+  * React's approach
+  * use cases
+    * complex UI
 
-</YouWillLearn>
-
-## How declarative UI compares to imperative {/*how-declarative-ui-compares-to-imperative*/}
-
-When you design UI interactions, you probably think about how the UI *changes* in response to user actions. Consider a form that lets the user submit an answer:
-
-* When you type something into the form, the "Submit" button **becomes enabled.**
-* When you press "Submit", both the form and the button **become disabled,** and a spinner **appears.**
-* If the network request succeeds, the form **gets hidden,** and the "Thank you" message **appears.**
-* If the network request fails, an error message **appears,** and the form **becomes enabled** again.
-
-In **imperative programming,** the above corresponds directly to how you implement interaction. You have to write the exact instructions to manipulate the UI depending on what just happened. Here's another way to think about this: imagine riding next to someone in a car and telling them turn by turn where to go.
-
-<Illustration src="/images/docs/illustrations/i_imperative-ui-programming.png"  alt="In a car driven by an anxious-looking person representing JavaScript, a passenger orders the driver to execute a sequence of complicated turn by turn navigations." />
-
-They don't know where you want to go, they just follow your commands. (And if you get the directions wrong, you end up in the wrong place!) It's called *imperative* because you have to "command" each element, from the spinner to the button, telling the computer *how* to update the UI.
-
-In this example of imperative UI programming, the form is built *without* React. It only uses the browser [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model):
-
-<Sandpack>
-
-```js src/index.js active
-async function handleFormSubmit(e) {
-  e.preventDefault();
-  disable(textarea);
-  disable(button);
-  show(loadingMessage);
-  hide(errorMessage);
-  try {
-    await submitForm(textarea.value);
-    show(successMessage);
-    hide(form);
-  } catch (err) {
-    show(errorMessage);
-    errorMessage.textContent = err.message;
-  } finally {
-    hide(loadingMessage);
-    enable(textarea);
-    enable(button);
-  }
-}
-
-function handleTextareaChange() {
-  if (textarea.value.length === 0) {
-    disable(button);
-  } else {
-    enable(button);
-  }
-}
-
-function hide(el) {
-  el.style.display = 'none';
-}
-
-function show(el) {
-  el.style.display = '';
-}
-
-function enable(el) {
-  el.disabled = false;
-}
-
-function disable(el) {
-  el.disabled = true;
-}
-
-function submitForm(answer) {
-  // Pretend it's hitting the network.
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (answer.toLowerCase() === 'istanbul') {
-        resolve();
-      } else {
-        reject(new Error('Good guess but a wrong answer. Try again!'));
-      }
-    }, 1500);
-  });
-}
-
-let form = document.getElementById('form');
-let textarea = document.getElementById('textarea');
-let button = document.getElementById('button');
-let loadingMessage = document.getElementById('loading');
-let errorMessage = document.getElementById('error');
-let successMessage = document.getElementById('success');
-form.onsubmit = handleFormSubmit;
-textarea.oninput = handleTextareaChange;
-```
-
-```js sandbox.config.json hidden
-{
-  "hardReloadOnChange": true
-}
-```
-
-```html public/index.html
-<form id="form">
-  <h2>City quiz</h2>
-  <p>
-    What city is located on two continents?
-  </p>
-  <textarea id="textarea"></textarea>
-  <br />
-  <button id="button" disabled>Submit</button>
-  <p id="loading" style="display: none">Loading...</p>
-  <p id="error" style="display: none; color: red;"></p>
-</form>
-<h1 id="success" style="display: none">That's right!</h1>
-
-<style>
-* { box-sizing: border-box; }
-body { font-family: sans-serif; margin: 20px; padding: 0; }
-</style>
-```
-
-</Sandpack>
-
-Manipulating the UI imperatively works well enough for isolated examples, but it gets exponentially more difficult to manage in more complex systems. Imagine updating a page full of different forms like this one. Adding a new UI element or a new interaction would require carefully checking all existing code to make sure you haven't introduced a bug (for example, forgetting to show or hide something).
-
-React was built to solve this problem.
-
-In React, you don't directly manipulate the UI--meaning you don't enable, disable, show, or hide components directly. Instead, you **declare what you want to show,** and React figures out how to update the UI. Think of getting into a taxi and telling the driver where you want to go instead of telling them exactly where to turn. It's the driver's job to get you there, and they might even know some shortcuts you haven't considered!
-
-<Illustration src="/images/docs/illustrations/i_declarative-ui-programming.png" alt="In a car driven by React, a passenger asks to be taken to a specific place on the map. React figures out how to do that." />
+  ![](../../../public/images/docs/illustrations/i_declarative-ui-programming.png)
 
 ## Thinking about UI declaratively {/*thinking-about-ui-declaratively*/}
 
-You've seen how to implement a form imperatively above. To better understand how to think in React, you'll walk through reimplementing this UI in React below:
+TODO: 
 
-1. **Identify** your component's different visual states
-2. **Determine** what triggers those state changes
-3. **Represent** the state in memory using `useState`
 4. **Remove** any non-essential state variables
 5. **Connect** the event handlers to set the state
 
 ### Step 1: Identify your component's different visual states {/*step-1-identify-your-components-different-visual-states*/}
 
-In computer science, you may hear about a ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine) being in one of several “states”. If you work with a designer, you may have seen mockups for different "visual states". React stands at the intersection of design and computer science, so both of these ideas are sources of inspiration.
+* React's states
+  * == ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine) | computer science + mockups / "visual states" | UX/UI
 
-First, you need to visualize all the different "states" of the UI the user might see:
+* steps
+  * identify your component's visual states
+  * BEFORE adding logic, mock states
 
-* **Empty**: Form has a disabled "Submit" button.
-* **Typing**: Form has an enabled "Submit" button.
-* **Submitting**: Form is completely disabled. Spinner is shown.
-* **Success**: "Thank you" message is shown instead of a form.
-* **Error**: Same as Typing state, but with an extra error message.
+#### Displaying MANY visual states at once {/*displaying-many-visual-states-at-once*/}
 
-Just like a designer, you'll want to "mock up" or create "mocks" for the different states before you add logic. For example, here is a mock for just the visual part of the form. This mock is controlled by a prop called `status` with a default value of `'empty'`:
-
-<Sandpack>
-
-```js
-export default function Form({
-  status = 'empty'
-}) {
-  if (status === 'success') {
-    return <h1>That's right!</h1>
-  }
-  return (
-    <>
-      <h2>City quiz</h2>
-      <p>
-        In which city is there a billboard that turns air into drinkable water?
-      </p>
-      <form>
-        <textarea />
-        <br />
-        <button>
-          Submit
-        </button>
-      </form>
-    </>
-  )
-}
-```
-
-</Sandpack>
-
-You could call that prop anything you like, the naming is not important. Try editing `status = 'empty'` to `status = 'success'` to see the success message appear. Mocking lets you quickly iterate on the UI before you wire up any logic. Here is a more fleshed out prototype of the same component, still "controlled" by the `status` prop:
-
-<Sandpack>
-
-```js
-export default function Form({
-  // Try 'submitting', 'error', 'success':
-  status = 'empty'
-}) {
-  if (status === 'success') {
-    return <h1>That's right!</h1>
-  }
-  return (
-    <>
-      <h2>City quiz</h2>
-      <p>
-        In which city is there a billboard that turns air into drinkable water?
-      </p>
-      <form>
-        <textarea disabled={
-          status === 'submitting'
-        } />
-        <br />
-        <button disabled={
-          status === 'empty' ||
-          status === 'submitting'
-        }>
-          Submit
-        </button>
-        {status === 'error' &&
-          <p className="Error">
-            Good guess but a wrong answer. Try again!
-          </p>
-        }
-      </form>
-      </>
-  );
-}
-```
-
-```css
-.Error { color: red; }
-```
-
-</Sandpack>
-
-<DeepDive>
-
-#### Displaying many visual states at once {/*displaying-many-visual-states-at-once*/}
-
-If a component has a lot of visual states, it can be convenient to show them all on one page:
-
-<Sandpack>
-
-```js src/App.js active
-import Form from './Form.js';
-
-let statuses = [
-  'empty',
-  'typing',
-  'submitting',
-  'success',
-  'error',
-];
-
-export default function App() {
-  return (
-    <>
-      {statuses.map(status => (
-        <section key={status}>
-          <h4>Form ({status}):</h4>
-          <Form status={status} />
-        </section>
-      ))}
-    </>
-  );
-}
-```
-
-```js src/Form.js
-export default function Form({ status }) {
-  if (status === 'success') {
-    return <h1>That's right!</h1>
-  }
-  return (
-    <form>
-      <textarea disabled={
-        status === 'submitting'
-      } />
-      <br />
-      <button disabled={
-        status === 'empty' ||
-        status === 'submitting'
-      }>
-        Submit
-      </button>
-      {status === 'error' &&
-        <p className="Error">
-          Good guess but a wrong answer. Try again!
-        </p>
-      }
-    </form>
-  );
-}
-```
-
-```css
-section { border-bottom: 1px solid #aaa; padding: 20px; }
-h4 { color: #222; }
-body { margin: 0; }
-.Error { color: red; }
-```
-
-</Sandpack>
-
-Pages like this are often called "living styleguides" or "storybooks".
-
-</DeepDive>
+* "living styleguides" OR "storybooks"
+* if a component has a lot of visual states -> show them ALL | 1 page
 
 ### Step 2: Determine what triggers those state changes {/*step-2-determine-what-triggers-those-state-changes*/}
 
-You can trigger state updates in response to two kinds of inputs:
+* inputs / trigger state updates
+  * **Human inputs**
 
-* **Human inputs,** like clicking a button, typing in a field, navigating a link.
-* **Computer inputs,** like a network response arriving, a timeout completing, an image loading.
+    ![](../../../public/images/docs/illustrations/i_inputs1.png)
+    * ⚠️COMMON requirements⚠️
+      * [event handlers](responding-to-events.md)
 
-<IllustrationBlock>
-  <Illustration caption="Human inputs" alt="A finger." src="/images/docs/illustrations/i_inputs1.png" />
-  <Illustration caption="Computer inputs" alt="Ones and zeroes." src="/images/docs/illustrations/i_inputs2.png" />
-</IllustrationBlock>
+  * **Computer inputs**
+    * _Examples:_ network response arriving, a timeout completing, an image loading
 
-In both cases, **you must set [state variables](/learn/state-a-components-memory#anatomy-of-usestate) to update the UI.** For the form you're developing, you will need to change state in response to a few different inputs:
+    ![](../../../public/images/docs/illustrations/i_inputs2.png)
 
-* **Changing the text input** (human) should switch it from the *Empty* state to the *Typing* state or back, depending on whether the text box is empty or not.
-* **Clicking the Submit button** (human) should switch it to the *Submitting* state.
-* **Successful network response** (computer) should switch it to the *Success* state.
-* **Failed network response** (computer) should switch it to the *Error* state with the matching error message.
+* steps
+  * set [state variables](state-a-components-memory.md#anatomy-of-usestate-anatomy-of-usestate)
 
-<Note>
-
-Notice that human inputs often require [event handlers](/learn/responding-to-events)!
-
-</Note>
-
-To help visualize this flow, try drawing each state on paper as a labeled circle, and each change between two states as an arrow. You can sketch out many flows this way and sort out bugs long before implementation.
-
-<DiagramGroup>
-
-<Diagram name="responding_to_input_flow" height={350} width={688} alt="Flow chart moving left to right with 5 nodes. The first node labeled 'empty' has one edge labeled 'start typing' connected to a node labeled 'typing'. That node has one edge labeled 'press submit' connected to a node labeled 'submitting', which has two edges. The left edge is labeled 'network error' connecting to a node labeled 'error'. The right edge is labeled 'network success' connecting to a node labeled 'success'.">
-
-Form states
-
-</Diagram>
-
-</DiagramGroup>
+* recommendations
+  * draw the transition between states
 
 ### Step 3: Represent the state in memory with `useState` {/*step-3-represent-the-state-in-memory-with-usestate*/}
 
+TODO: 
 Next you'll need to represent the visual states of your component in memory with [`useState`.](/reference/react/useState) Simplicity is key: each piece of state is a "moving piece", and **you want as few "moving pieces" as possible.** More complexity leads to more bugs!
 
 Start with the state that *absolutely must* be there. For example, you'll need to store the `answer` for the input, and the `error` (if it exists) to store the last error:
