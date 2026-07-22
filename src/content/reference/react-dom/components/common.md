@@ -3,7 +3,7 @@ title: "Common components (e.g. <div>)"
 ---
 
 * goal
-  * COMMON props and events / supported by ALL built-in browser components 
+  * COMMON props & events / supported -- by -- ALL built-in browser components 
 
 ## Reference {/*reference*/}
 

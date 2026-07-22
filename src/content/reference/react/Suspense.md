@@ -2,12 +2,10 @@
 title: <Suspense>
 ---
 
-* TODO:
-
-<Intro>
-
-`<Suspense>` lets you display a fallback until its children have finished loading.
-
+* `<Suspense>`
+  * == React built-in component /
+    * lets you
+      * display a fallback TILL its children have finished loading
 
 ```js
 <Suspense fallback={<Loading />}>
@@ -15,19 +13,19 @@ title: <Suspense>
 </Suspense>
 ```
 
-</Intro>
-
-<InlineToc />
-
----
-
 ## Reference {/*reference*/}
 
 ### `<Suspense>` {/*suspense*/}
 
 #### Props {/*props*/}
-* `children`: The actual UI you intend to render. If `children` suspends while rendering, the Suspense boundary will switch to rendering `fallback`.
-* `fallback`: An alternate UI to render in place of the actual UI if it has not finished loading. Any valid React node is accepted, though in practice, a fallback is a lightweight placeholder view, such as a loading spinner or skeleton. Suspense will automatically switch to `fallback` when `children` suspends, and back to `children` when the data is ready. If `fallback` suspends while rendering, it will activate the closest parent Suspense boundary.
+* `children`
+  * == actual UI / you intend to render
+  * TODO: If `children` suspends while rendering, the Suspense boundary will switch to rendering `fallback`.
+* `fallback`
+  * An alternate UI to render in place of the actual UI if it has not finished loading
+  * Any valid React node is accepted, though in practice, a fallback is a lightweight placeholder view, such as a loading spinner or skeleton
+  * Suspense will automatically switch to `fallback` when `children` suspends, and back to `children` when the data is ready
+  * If `fallback` suspends while rendering, it will activate the closest parent Suspense boundary.
 
 #### Caveats {/*caveats*/}
 
@@ -35,8 +33,6 @@ title: <Suspense>
 - If Suspense was displaying content for the tree, but then it suspended again, the `fallback` will be shown again unless the update causing it was caused by [`startTransition`](/reference/react/startTransition) or [`useDeferredValue`](/reference/react/useDeferredValue).
 - If React needs to hide the already visible content because it suspended again, it will clean up [layout Effects](/reference/react/useLayoutEffect) in the content tree. When the content is ready to be shown again, React will fire the layout Effects again. This ensures that Effects measuring the DOM layout don't try to do this while the content is hidden.
 - React includes under-the-hood optimizations like *Streaming Server Rendering* and *Selective Hydration* that are integrated with Suspense. Read [an architectural overview](https://github.com/reactwg/react-18/discussions/37) and watch [a technical talk](https://www.youtube.com/watch?v=pj5N-Khihgc) to learn more.
-
----
 
 ## Usage {/*usage*/}
 
@@ -52,205 +48,9 @@ You can wrap any part of your application with a Suspense boundary:
 
 React will display your <CodeStep step={1}>loading fallback</CodeStep> until all the code and data needed by <CodeStep step={2}>the children</CodeStep> has been loaded.
 
-In the example below, the `Albums` component *suspends* while fetching the list of albums. Until it's ready to render, React switches the closest Suspense boundary above to show the fallback--your `Loading` component. Then, when the data loads, React hides the `Loading` fallback and renders the `Albums` component with data.
-
-<Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
-```js src/App.js hidden
-import { useState } from 'react';
-import ArtistPage from './ArtistPage.js';
-
-export default function App() {
-  const [show, setShow] = useState(false);
-  if (show) {
-    return (
-      <ArtistPage
-        artist={{
-          id: 'the-beatles',
-          name: 'The Beatles',
-        }}
-      />
-    );
-  } else {
-    return (
-      <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
-      </button>
-    );
-  }
-}
-```
-
-```js src/ArtistPage.js active
-import { Suspense } from 'react';
-import Albums from './Albums.js';
-
-export default function ArtistPage({ artist }) {
-  return (
-    <>
-      <h1>{artist.name}</h1>
-      <Suspense fallback={<Loading />}>
-        <Albums artistId={artist.id} />
-      </Suspense>
-    </>
-  );
-}
-
-function Loading() {
-  return <h2>🌀 Loading...</h2>;
-}
-```
-
-```js src/Albums.js hidden
-import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
-
-export default function Albums({ artistId }) {
-  const albums = use(fetchData(`/${artistId}/albums`));
-  return (
-    <ul>
-      {albums.map(album => (
-        <li key={album.id}>
-          {album.title} ({album.year})
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
-```
-
-```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
-
-let cache = new Map();
-
-export function fetchData(url) {
-  if (!cache.has(url)) {
-    cache.set(url, getData(url));
-  }
-  return cache.get(url);
-}
-
-async function getData(url) {
-  if (url === '/the-beatles/albums') {
-    return await getAlbums();
-  } else {
-    throw Error('Not implemented');
-  }
-}
-
-async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
-  await new Promise(resolve => {
-    setTimeout(resolve, 3000);
-  });
-
-  return [{
-    id: 13,
-    title: 'Let It Be',
-    year: 1970
-  }, {
-    id: 12,
-    title: 'Abbey Road',
-    year: 1969
-  }, {
-    id: 11,
-    title: 'Yellow Submarine',
-    year: 1969
-  }, {
-    id: 10,
-    title: 'The Beatles',
-    year: 1968
-  }, {
-    id: 9,
-    title: 'Magical Mystery Tour',
-    year: 1967
-  }, {
-    id: 8,
-    title: 'Sgt. Pepper\'s Lonely Hearts Club Band',
-    year: 1967
-  }, {
-    id: 7,
-    title: 'Revolver',
-    year: 1966
-  }, {
-    id: 6,
-    title: 'Rubber Soul',
-    year: 1965
-  }, {
-    id: 5,
-    title: 'Help!',
-    year: 1965
-  }, {
-    id: 4,
-    title: 'Beatles For Sale',
-    year: 1964
-  }, {
-    id: 3,
-    title: 'A Hard Day\'s Night',
-    year: 1964
-  }, {
-    id: 2,
-    title: 'With The Beatles',
-    year: 1963
-  }, {
-    id: 1,
-    title: 'Please Please Me',
-    year: 1963
-  }];
-}
-```
-
-</Sandpack>
-
-<Note>
+In the example below, the `Albums` component *suspends* while fetching the list of albums
+* Until it's ready to render, React switches the closest Suspense boundary above to show the fallback--your `Loading` component
+* Then, when the data loads, React hides the `Loading` fallback and renders the `Albums` component with data.
 
 **Only Suspense-enabled data sources will activate the Suspense component.** They include:
 
@@ -260,17 +60,17 @@ async function getAlbums() {
 
 Suspense **does not** detect when data is fetched inside an Effect or event handler.
 
-The exact way you would load data in the `Albums` component above depends on your framework. If you use a Suspense-enabled framework, you'll find the details in its data fetching documentation.
+The exact way you would load data in the `Albums` component above depends on your framework
+* If you use a Suspense-enabled framework, you'll find the details in its data fetching documentation.
 
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React. 
-
-</Note>
-
----
+Suspense-enabled data fetching without the use of an opinionated framework is not yet supported
+* The requirements for implementing a Suspense-enabled data source are unstable and undocumented
+* An official API for integrating data sources with Suspense will be released in a future version of React. 
 
 ### Revealing content together at once {/*revealing-content-together-at-once*/}
 
-By default, the whole tree inside Suspense is treated as a single unit. For example, even if *only one* of these components suspends waiting for some data, *all* of them together will be replaced by the loading indicator:
+By default, the whole tree inside Suspense is treated as a single unit
+* For example, even if *only one* of these components suspends waiting for some data, *all* of them together will be replaced by the loading indicator:
 
 ```js {2-5}
 <Suspense fallback={<Loading />}>
@@ -283,289 +83,13 @@ By default, the whole tree inside Suspense is treated as a single unit. For exam
 
 Then, after all of them are ready to be displayed, they will all appear together at once.
 
-In the example below, both `Biography` and `Albums` fetch some data. However, because they are grouped under a single Suspense boundary, these components always "pop in" together at the same time.
+In the example below, both `Biography` and `Albums` fetch some data
+* However, because they are grouped under a single Suspense boundary, these components always "pop in" together at the same time.
 
-<Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
-```js src/App.js hidden
-import { useState } from 'react';
-import ArtistPage from './ArtistPage.js';
-
-export default function App() {
-  const [show, setShow] = useState(false);
-  if (show) {
-    return (
-      <ArtistPage
-        artist={{
-          id: 'the-beatles',
-          name: 'The Beatles',
-        }}
-      />
-    );
-  } else {
-    return (
-      <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
-      </button>
-    );
-  }
-}
-```
-
-```js src/ArtistPage.js active
-import { Suspense } from 'react';
-import Albums from './Albums.js';
-import Biography from './Biography.js';
-import Panel from './Panel.js';
-
-export default function ArtistPage({ artist }) {
-  return (
-    <>
-      <h1>{artist.name}</h1>
-      <Suspense fallback={<Loading />}>
-        <Biography artistId={artist.id} />
-        <Panel>
-          <Albums artistId={artist.id} />
-        </Panel>
-      </Suspense>
-    </>
-  );
-}
-
-function Loading() {
-  return <h2>🌀 Loading...</h2>;
-}
-```
-
-```js src/Panel.js
-export default function Panel({ children }) {
-  return (
-    <section className="panel">
-      {children}
-    </section>
-  );
-}
-```
-
-```js src/Biography.js hidden
-import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
-
-export default function Biography({ artistId }) {
-  const bio = use(fetchData(`/${artistId}/bio`));
-  return (
-    <section>
-      <p className="bio">{bio}</p>
-    </section>
-  );
-}
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
-```
-
-```js src/Albums.js hidden
-import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
-
-export default function Albums({ artistId }) {
-  const albums = use(fetchData(`/${artistId}/albums`));
-  return (
-    <ul>
-      {albums.map(album => (
-        <li key={album.id}>
-          {album.title} ({album.year})
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
-```
-
-```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
-
-let cache = new Map();
-
-export function fetchData(url) {
-  if (!cache.has(url)) {
-    cache.set(url, getData(url));
-  }
-  return cache.get(url);
-}
-
-async function getData(url) {
-  if (url === '/the-beatles/albums') {
-    return await getAlbums();
-  } else if (url === '/the-beatles/bio') {
-    return await getBio();
-  } else {
-    throw Error('Not implemented');
-  }
-}
-
-async function getBio() {
-  // Add a fake delay to make waiting noticeable.
-  await new Promise(resolve => {
-    setTimeout(resolve, 1500);
-  });
-
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
-}
-
-async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
-  await new Promise(resolve => {
-    setTimeout(resolve, 3000);
-  });
-
-  return [{
-    id: 13,
-    title: 'Let It Be',
-    year: 1970
-  }, {
-    id: 12,
-    title: 'Abbey Road',
-    year: 1969
-  }, {
-    id: 11,
-    title: 'Yellow Submarine',
-    year: 1969
-  }, {
-    id: 10,
-    title: 'The Beatles',
-    year: 1968
-  }, {
-    id: 9,
-    title: 'Magical Mystery Tour',
-    year: 1967
-  }, {
-    id: 8,
-    title: 'Sgt. Pepper\'s Lonely Hearts Club Band',
-    year: 1967
-  }, {
-    id: 7,
-    title: 'Revolver',
-    year: 1966
-  }, {
-    id: 6,
-    title: 'Rubber Soul',
-    year: 1965
-  }, {
-    id: 5,
-    title: 'Help!',
-    year: 1965
-  }, {
-    id: 4,
-    title: 'Beatles For Sale',
-    year: 1964
-  }, {
-    id: 3,
-    title: 'A Hard Day\'s Night',
-    year: 1964
-  }, {
-    id: 2,
-    title: 'With The Beatles',
-    year: 1963
-  }, {
-    id: 1,
-    title: 'Please Please Me',
-    year: 1963
-  }];
-}
-```
-
-```css
-.bio { font-style: italic; }
-
-.panel {
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  margin-top: 20px;
-  padding: 10px;
-}
-```
-
-</Sandpack>
-
-Components that load data don't have to be direct children of the Suspense boundary. For example, you can move `Biography` and `Albums` into a new `Details` component. This doesn't change the behavior. `Biography` and `Albums` share the same closest parent Suspense boundary, so their reveal is coordinated together.
+Components that load data don't have to be direct children of the Suspense boundary
+* For example, you can move `Biography` and `Albums` into a new `Details` component
+* This doesn't change the behavior
+* `Biography` and `Albums` share the same closest parent Suspense boundary, so their reveal is coordinated together.
 
 ```js {2,8-11}
 <Suspense fallback={<Loading />}>
@@ -584,11 +108,12 @@ function Details({ artistId }) {
 }
 ```
 
----
-
 ### Revealing nested content as it loads {/*revealing-nested-content-as-it-loads*/}
 
-When a component suspends, the closest parent Suspense component shows the fallback. This lets you nest multiple Suspense components to create a loading sequence. Each Suspense boundary's fallback will be filled in as the next level of content becomes available. For example, you can give the album list its own fallback:
+When a component suspends, the closest parent Suspense component shows the fallback
+* This lets you nest multiple Suspense components to create a loading sequence
+* Each Suspense boundary's fallback will be filled in as the next level of content becomes available
+* For example, you can give the album list its own fallback:
 
 ```js {3,7}
 <Suspense fallback={<BigSpinner />}>
@@ -611,21 +136,6 @@ The sequence will be:
 1. Finally, once `Albums` finishes loading, it replaces `AlbumsGlimmer`.
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js src/App.js hidden
 import { useState } from 'react';

@@ -2,11 +2,9 @@
 title: renderToNodeStream
 ---
 
-<Deprecated>
+* ⚠️deprecated⚠️
+  * replaced -- by -- [`renderToPipeableStream`](renderToPipeableStream.md)
 
-This API will be removed in a future major version of React. Use [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) instead.
-
-</Deprecated>
 
 <Intro>
 

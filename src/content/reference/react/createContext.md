@@ -2,37 +2,28 @@
 title: createContext
 ---
 
-<Intro>
-
-`createContext` lets you create a [context](/learn/passing-data-deeply-with-context) that components can provide or read.
-
-```js
-const SomeContext = createContext(defaultValue)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `createContext`
+  * == React's built-in React APIs
+    * lets you
+      * create a [context](../../learn/passing-data-deeply-with-context) / 
+        * components can provide OR read
+  * uses
+    * \+ [`useContext`](useContext)
+    * outside of ANY components
 
 ## Reference {/*reference*/}
 
 ### `createContext(defaultValue)` {/*createcontext*/}
 
-Call `createContext` outside of any components to create a context.
-
-```js
-import { createContext } from 'react';
-
-const ThemeContext = createContext('light');
-```
-
-[See more examples below.](#usage)
-
 #### Parameters {/*parameters*/}
 
-* `defaultValue`: The value that you want the context to have when there is no matching context provider in the tree above the component that reads context. If you don't have any meaningful default value, specify `null`. The default value is meant as a "last resort" fallback. It is static and never changes over time.
+* `defaultValue`
+  * == value / 
+    * context has | there is NO matching context provider | tree / above the component that reads context
+    * static
+    * | time, NO change
+  * recommendations
+    * if there is NO default value | your use case -> specify `null`
 
 #### Returns {/*returns*/}
 

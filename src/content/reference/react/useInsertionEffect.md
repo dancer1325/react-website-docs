@@ -2,25 +2,19 @@
 title: useInsertionEffect
 ---
 
-<Pitfall>
-
-`useInsertionEffect` is for CSS-in-JS library authors. Unless you are working on a CSS-in-JS library and need a place to inject the styles, you probably want [`useEffect`](/reference/react/useEffect) or [`useLayoutEffect`](/reference/react/useLayoutEffect) instead.
-
-</Pitfall>
-
-<Intro>
-
-`useInsertionEffect` allows inserting elements into the DOM before any layout Effects fire.
-
-```js
-useInsertionEffect(setup, dependencies?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useInsertionEffect`
+  * == variation of [`useEffect`](useEffect) /
+    * allows
+      * BEFORE React makes changes | DOM,
+        * inserting elements | DOM
+  * recommendations
+    * if it's possible -> use 
+      * [`useEffect`](useEffect)
+      * [`useLayoutEffect`](/reference/react/useLayoutEffect)
+  * use cases (RARELY)
+    * insert dynamic CSS
+  * audience
+    * CSS-in-JS library authors
 
 ## Reference {/*reference*/}
 

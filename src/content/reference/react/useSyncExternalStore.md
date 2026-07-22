@@ -2,19 +2,10 @@
 title: useSyncExternalStore
 ---
 
-<Intro>
-
-`useSyncExternalStore` is a React Hook that lets you subscribe to an external store.
-
-```js
-const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useSyncExternalStore` 
+  * == React Hook /
+    * lets you
+      * subscribe | EXTERNAL store
 
 ## Reference {/*reference*/}
 

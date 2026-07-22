@@ -2,19 +2,11 @@
 title: useDeferredValue
 ---
 
-<Intro>
-
-`useDeferredValue` is a React Hook that lets you defer updating a part of the UI.
-
-```js
-const deferredValue = useDeferredValue(value)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useDeferredValue`
+  * == React Hook /
+    * lets you
+      * defer updating a NON-critical part of the UI
+        * -> OTHER parts can update FIRST
 
 ## Reference {/*reference*/}
 

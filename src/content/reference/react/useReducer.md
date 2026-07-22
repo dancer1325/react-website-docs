@@ -2,39 +2,14 @@
 title: useReducer
 ---
 
-<Intro>
-
-`useReducer` is a React Hook that lets you add a [reducer](/learn/extracting-state-logic-into-a-reducer) to your component.
-
-```js
-const [state, dispatch] = useReducer(reducer, initialArg, init?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useReducer`
+  * == React Hook /
+    * lets you
+      * add a [reducer](../../learn/extracting-state-logic-into-a-reducer) | your component
 
 ## Reference {/*reference*/}
 
 ### `useReducer(reducer, initialArg, init?)` {/*usereducer*/}
-
-Call `useReducer` at the top level of your component to manage its state with a [reducer.](/learn/extracting-state-logic-into-a-reducer)
-
-```js
-import { useReducer } from 'react';
-
-function reducer(state, action) {
-  // ...
-}
-
-function MyComponent() {
-  const [state, dispatch] = useReducer(reducer, { age: 42 });
-  // ...
-```
-
-[See more examples below.](#usage)
 
 #### Parameters {/*parameters*/}
 

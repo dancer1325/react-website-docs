@@ -2,46 +2,18 @@
 title: "Built-in React DOM Hooks"
 ---
 
-<Intro>
+* React DOM Hooks
+  * ⚠️ONLY supported | web applications⚠️
+    * == run | browser DOM environment
+  * ❌NOT supported | NON-browser environments (_Example:_ iOS, Android, or Windows applications)❌
+    * [here](../../react/hooks.md)
 
-The `react-dom` package contains Hooks that are only supported for web applications (which run in the browser DOM environment). These Hooks are not supported in non-browser environments like iOS, Android, or Windows applications. If you are looking for Hooks that are supported in web browsers *and other environments* see [the React Hooks page](/reference/react). This page lists all the Hooks in the `react-dom` package.
+## Form-related Hooks {/*form-hooks*/}
 
-</Intro>
-
----
-
-## Form Hooks {/*form-hooks*/}
-
-<Canary>
-
-Form Hooks are currently only available in React's canary and experimental channels. Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
-
-</Canary>
-
-*Forms* let you create interactive controls for submitting information.  To manage forms in your components, use one of these Hooks:
-
-* [`useFormStatus`](/reference/react-dom/hooks/useFormStatus) allows you to make updates to the UI based on the status of the a form.
-
-```js
-function Form({ action }) {
-  async function increment(n) {
-    return n + 1;
-  }
-  const [count, incrementFormAction] = useActionState(increment, 0);
-  return (
-    <form action={action}>
-      <button formAction={incrementFormAction}>Count: {count}</button>
-      <Button />
-    </form>
-  );
-}
-
-function Button() {
-  const { pending } = useFormStatus();
-  return (
-    <button disabled={pending} type="submit">
-      Submit
-    </button>
-  );
-}
-```
+* Form-related Hooks
+  * requirements
+    * ⚠️React's Canary & [experimental channels](../../../community/versioning-policy.md#all-release-channels-all-release-channels)⚠️
+  * let you
+    * create interactive controls -- for -- submitting information
+  * built-in hooks
+    * [`useFormStatus`](useFormStatus)

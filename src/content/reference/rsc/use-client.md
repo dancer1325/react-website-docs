@@ -4,44 +4,18 @@ titleForTitleTag: "'use client' directive"
 canary: true
 ---
 
-<Canary>
-
-`'use client'` is needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
-</Canary>
-
-
-<Intro>
-
-`'use client'` lets you mark what code runs on the client.
-
-</Intro>
-
-<InlineToc />
-
----
+* `'use client'`
+  * lets you 
+    * mark the code / runs | client
+  * use cases
+    * | use React Server Components
+	* | build a library / compatible -- with -- [React Server components]()
 
 ## Reference {/*reference*/}
 
 ### `'use client'` {/*use-client*/}
 
-Add `'use client'` at the top of a file to mark the module and its transitive dependencies as client code.
-
-```js {1}
-'use client';
-
-import { useState } from 'react';
-import { formatDate } from './formatters';
-import Button from './button';
-
-export default function RichTextEditor({ timestamp, text }) {
-  const date = formatDate(timestamp);
-  // ...
-  const editButton = <Button />;
-  // ...
-}
-```
-
-When a file marked with `'use client'` is imported from a Server Component, [compatible bundlers](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) will treat the module import as a boundary between server-run and client-run code.
+TODO: When a file marked with `'use client'` is imported from a Server Component, [compatible bundlers](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) will treat the module import as a boundary between server-run and client-run code.
 
 As dependencies of `RichTextEditor`, `formatDate` and `Button` will also be evaluated on the client regardless of whether their modules contain a `'use client'` directive. Note that a single module may be evaluated on the server when imported from server code and on the client when imported from client code.
 

@@ -2,25 +2,19 @@
 title: useTransition
 ---
 
-<Intro>
-
-`useTransition` is a React Hook that lets you update the state without blocking the UI.
-
-```js
-const [isPending, startTransition] = useTransition()
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useTransition`
+  * == React Hook /
+    * lets you
+      * update the state WITHOUT blocking the UI
+      * mark a state transition -- as -- NON-blocking
 
 ## Reference {/*reference*/}
 
 ### `useTransition()` {/*usetransition*/}
 
-Call `useTransition` at the top level of your component to mark some state updates as Transitions.
+TODO: 
+Call `useTransition` at the top level of your component to mark some state updates 
+as Transitions.
 
 ```js
 import { useTransition } from 'react';
@@ -30,8 +24,6 @@ function TabContainer() {
   // ...
 }
 ```
-
-[See more examples below.](#usage)
 
 #### Parameters {/*parameters*/}
 

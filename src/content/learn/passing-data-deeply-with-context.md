@@ -2,35 +2,42 @@
 title: Passing Data Deeply with Context
 ---
 
-<Intro>
+* goal
+  * "prop drilling"
+  * how to replace repetitive prop passing -- with -- context
+  * context
+    * use cases
+    * ALTERNATIVES
 
-Usually, you will pass information from a parent component to a child component via props. But passing props can become verbose and inconvenient if you have to pass them through many components in the middle, or if many components in your app need the same information. *Context* lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props.
-
-</Intro>
-
-<YouWillLearn>
-
-- What "prop drilling" is
-- How to replace repetitive prop passing with context
-- Common use cases for context
-- Common alternatives to context
-
-</YouWillLearn>
+TODO: 
+Usually, you will pass information from a parent component to a child component via props
+* But passing props can become verbose and inconvenient if you have to pass them through many components in the middle, or 
+if many components in your app need the same information
+* *Context* lets the parent component make some information available to any component in the tree below it—no matter
+how deep—without passing it explicitly through props
 
 ## The problem with passing props {/*the-problem-with-passing-props*/}
 
 [Passing props](/learn/passing-props-to-a-component) is a great way to explicitly pipe data through your UI tree to the components that use it.
 
-But passing props can become verbose and inconvenient when you need to pass some prop deeply through the tree, or if many components need the same prop. The nearest common ancestor could be far removed from the components that need data, and [lifting state up](/learn/sharing-state-between-components) that high can lead to a situation called "prop drilling".
+But passing props can become verbose and inconvenient when you need to pass some prop deeply through the tree, or if many components need the same prop
+* The nearest common ancestor could be far removed from the components that need data, and [lifting state up](/learn/sharing-state-between-components) that high can lead to a situation called "prop drilling".
 
 <DiagramGroup>
 
-<Diagram name="passing_data_lifting_state" height={160} width={608} captionPosition="top" alt="Diagram with a tree of three components. The parent contains a bubble representing a value highlighted in purple. The value flows down to each of the two children, both highlighted in purple." >
+<Diagram name="passing_data_lifting_state" height={160} width={608} captionPosition="top" alt="Diagram with a tree of three components
+* The parent contains a bubble representing a value highlighted in purple
+* The value flows down to each of the two children, both highlighted in purple." >
 
 Lifting state up
 
 </Diagram>
-<Diagram name="passing_data_prop_drilling" height={430} width={608} captionPosition="top" alt="Diagram with a tree of ten nodes, each node with two children or less. The root node contains a bubble representing a value highlighted in purple. The value flows down through the two children, each of which pass the value but do not contain it. The left child passes the value down to two children which are both highlighted purple. The right child of the root passes the value through to one of its two children - the right one, which is highlighted purple. That child passed the value through its single child, which passes it down to both of its two children, which are highlighted purple.">
+<Diagram name="passing_data_prop_drilling" height={430} width={608} captionPosition="top" alt="Diagram with a tree of ten nodes, each node with two children or less
+* The root node contains a bubble representing a value highlighted in purple
+* The value flows down through the two children, each of which pass the value but do not contain it
+* The left child passes the value down to two children which are both highlighted purple
+* The right child of the root passes the value through to one of its two children - the right one, which is highlighted purple
+* That child passed the value through its single child, which passes it down to both of its two children, which are highlighted purple.">
 
 Prop drilling
 
@@ -42,7 +49,10 @@ Wouldn't it be great if there were a way to "teleport" data to the components in
 
 ## Context: an alternative to passing props {/*context-an-alternative-to-passing-props*/}
 
-Context lets a parent component provide data to the entire tree below it. There are many uses for context. Here is one example. Consider this `Heading` component that accepts a `level` for its size:
+Context lets a parent component provide data to the entire tree below it
+* There are many uses for context
+* Here is one example
+* Consider this `Heading` component that accepts a `level` for its size:
 
 <Sandpack>
 
@@ -190,7 +200,8 @@ Currently, you pass the `level` prop to each `<Heading>` separately:
 </Section>
 ```
 
-It would be nice if you could pass the `level` prop to the `<Section>` component instead and remove it from the `<Heading>`. This way you could enforce that all headings in the same section have the same size:
+It would be nice if you could pass the `level` prop to the `<Section>` component instead and remove it from the `<Heading>`
+* This way you could enforce that all headings in the same section have the same size:
 
 ```js
 <Section level={3}>
@@ -202,7 +213,9 @@ It would be nice if you could pass the `level` prop to the `<Section>` component
 
 But how can the `<Heading>` component know the level of its closest `<Section>`? **That would require some way for a child to "ask" for data from somewhere above in the tree.**
 
-You can't do it with props alone. This is where context comes into play. You will do it in three steps:
+You can't do it with props alone
+* This is where context comes into play
+* You will do it in three steps:
 
 1. **Create** a context. (You can call it `LevelContext`, since it's for the heading level.)
 2. **Use** that context from the component that needs the data. (`Heading` will use `LevelContext`.)

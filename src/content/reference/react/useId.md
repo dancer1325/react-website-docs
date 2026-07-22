@@ -2,35 +2,16 @@
 title: useId
 ---
 
-<Intro>
-
-`useId` is a React Hook for generating unique IDs that can be passed to accessibility attributes.
-
-```js
-const id = useId()
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useId`
+  * == React Hook /
+    * lets you
+      * generate UNIQUE IDs / EACH component instance
+  * use cases
+    * accessibility APIs
 
 ## Reference {/*reference*/}
 
 ### `useId()` {/*useid*/}
-
-Call `useId` at the top level of your component to generate a unique ID:
-
-```js
-import { useId } from 'react';
-
-function PasswordField() {
-  const passwordHintId = useId();
-  // ...
-```
-
-[See more examples below.](#usage)
 
 #### Parameters {/*parameters*/}
 

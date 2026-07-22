@@ -2,42 +2,20 @@
 title: useImperativeHandle
 ---
 
-<Intro>
-
-`useImperativeHandle` is a React Hook that lets you customize the handle exposed as a [ref.](/learn/manipulating-the-dom-with-refs)
-
-```js
-useImperativeHandle(ref, createHandle, dependencies?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useImperativeHandle` 
+  * == React Hook /
+    * lets you
+      * customize the exposed [ref](../../learn/manipulating-the-dom-with-refs) by your component 
+  * use cases
+    * RARELY
 
 ## Reference {/*reference*/}
 
 ### `useImperativeHandle(ref, createHandle, dependencies?)` {/*useimperativehandle*/}
 
-Call `useImperativeHandle` at the top level of your component to customize the ref handle it exposes:
-
-```js
-import { forwardRef, useImperativeHandle } from 'react';
-
-const MyInput = forwardRef(function MyInput(props, ref) {
-  useImperativeHandle(ref, () => {
-    return {
-      // ... your methods ...
-    };
-  }, []);
-  // ...
-```
-
-[See more examples below.](#usage)
-
 #### Parameters {/*parameters*/}
 
+TODO: 
 * `ref`: The `ref` you received as the second argument from the [`forwardRef` render function.](/reference/react/forwardRef#render-function)
 
 * `createHandle`: A function that takes no arguments and returns the ref handle you want to expose. That ref handle can have any type. Usually, you will return an object with the methods you want to expose.
@@ -46,9 +24,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 #### Returns {/*returns*/}
 
-`useImperativeHandle` returns `undefined`.
-
----
+`undefined`
 
 ## Usage {/*usage*/}
 

@@ -2,45 +2,17 @@
 title: useEffect
 ---
 
-<Intro>
-
-`useEffect` is a React Hook that lets you [synchronize a component with an external system.](/learn/synchronizing-with-effects)
-
-```js
-useEffect(setup, dependencies?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useEffect`
+  * == React Hook /
+    * lets you
+      * [synchronize a component -- with an -- EXTERNAL system](../../learn/synchronizing-with-effects)
+  * ❌NOT use cases❌
+    * orchestrate the data flow of your application
+    * [MORE](../../learn/you-might-not-need-an-effect)
 
 ## Reference {/*reference*/}
 
 ### `useEffect(setup, dependencies?)` {/*useeffect*/}
-
-Call `useEffect` at the top level of your component to declare an Effect:
-
-```js
-import { useEffect } from 'react';
-import { createConnection } from './chat.js';
-
-function ChatRoom({ roomId }) {
-  const [serverUrl, setServerUrl] = useState('https://localhost:1234');
-
-  useEffect(() => {
-    const connection = createConnection(serverUrl, roomId);
-    connection.connect();
-    return () => {
-      connection.disconnect();
-    };
-  }, [serverUrl, roomId]);
-  // ...
-}
-```
-
-[See more examples below.](#usage)
 
 #### Parameters {/*parameters*/}
 
@@ -136,91 +108,19 @@ An Effect lets you [keep your component synchronized](/learn/synchronizing-with-
 
 #### Connecting to a chat server {/*connecting-to-a-chat-server*/}
 
-In this example, the `ChatRoom` component uses an Effect to stay connected to an external system defined in `chat.js`. Press "Open chat" to make the `ChatRoom` component appear. This sandbox runs in development mode, so there is an extra connect-and-disconnect cycle, as [explained here.](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) Try changing the `roomId` and `serverUrl` using the dropdown and the input, and see how the Effect re-connects to the chat. Press "Close chat" to see the Effect disconnect one last time.
+In this example, the `ChatRoom` component uses an Effect to stay connected to an external system 
+defined in `chat.js`
+* Press "Open chat" to make the `ChatRoom` component appear
+* This sandbox runs in development mode, so there is an extra connect-and-disconnect cycle, as [explained here.](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) Try changing the `roomId` and `serverUrl` using the dropdown and the input, and see how the Effect re-connects to the chat
+* Press "Close chat" to see the Effect disconnect one last time.
 
-<Sandpack>
-
-```js
-import { useState, useEffect } from 'react';
-import { createConnection } from './chat.js';
-
-function ChatRoom({ roomId }) {
-  const [serverUrl, setServerUrl] = useState('https://localhost:1234');
-
-  useEffect(() => {
-    const connection = createConnection(serverUrl, roomId);
-    connection.connect();
-    return () => {
-      connection.disconnect();
-    };
-  }, [roomId, serverUrl]);
-
-  return (
-    <>
-      <label>
-        Server URL:{' '}
-        <input
-          value={serverUrl}
-          onChange={e => setServerUrl(e.target.value)}
-        />
-      </label>
-      <h1>Welcome to the {roomId} room!</h1>
-    </>
-  );
-}
-
-export default function App() {
-  const [roomId, setRoomId] = useState('general');
-  const [show, setShow] = useState(false);
-  return (
-    <>
-      <label>
-        Choose the chat room:{' '}
-        <select
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
-        </select>
-      </label>
-      <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
-      </button>
-      {show && <hr />}
-      {show && <ChatRoom roomId={roomId} />}
-    </>
-  );
-}
-```
-
-```js src/chat.js
-export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
-  return {
-    connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
-    },
-    disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
-    }
-  };
-}
-```
-
-```css
-input { display: block; margin-bottom: 20px; }
-button { margin-left: 10px; }
-```
-
-</Sandpack>
-
-<Solution />
 
 #### Listening to a global browser event {/*listening-to-a-global-browser-event*/}
 
-In this example, the external system is the browser DOM itself. Normally, you'd specify event listeners with JSX, but you can't listen to the global [`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window) object this way. An Effect lets you connect to the `window` object and listen to its events. Listening to the `pointermove` event lets you track the cursor (or finger) position and update the red dot to move with it.
+In this example, the external system is the browser DOM itself
+* Normally, you'd specify event listeners with JSX, but you can't listen to the global [`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window) object this way
+* An Effect lets you connect to the `window` object and listen to its events
+* Listening to the `pointermove` event lets you track the cursor (or finger) position and update the red dot to move with it.
 
 <Sandpack>
 
@@ -269,7 +169,8 @@ body {
 
 #### Triggering an animation {/*triggering-an-animation*/}
 
-In this example, the external system is the animation library in `animation.js`. It provides a JavaScript class called `FadeInAnimation` that takes a DOM node as an argument and exposes `start()` and `stop()` methods to control the animation. This component [uses a ref](/learn/manipulating-the-dom-with-refs) to access the underlying DOM node. The Effect reads the DOM node from the ref and automatically starts the animation for that node when the component appears.
+In this example, the external system is the animation library in `animation.js`
+* It provides a JavaScript class called `FadeInAnimation` that takes a DOM node as an argument and exposes `start()` and `stop()` methods to control the animation. This component [uses a ref](/learn/manipulating-the-dom-with-refs) to access the underlying DOM node. The Effect reads the DOM node from the ref and automatically starts the animation for that node when the component appears.
 
 <Sandpack>
 

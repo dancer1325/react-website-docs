@@ -18,10 +18,14 @@ permalink: index.html
         * [Remix](https://remix.run/)
     * is
       * [Declarative](learn/reacting-to-input-with-state.md)
-      * **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs
+      * **Component-Based:** 
+        * TODO: Build encapsulated components that manage their own state, then compose them to make complex UIs
         * Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep the state out of the DOM.
-      * **Learn Once, Write Anywhere:** We don't make asssumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code
-        * React can also render on the server using [Node](https://nodejs.org/en) and power mobile apps using [React Native](https://reactnative.dev/).
+      * **Learn Once, Write Anywhere:**
+        * [can render -- , thanks to Node, -- | server](reference/react-dom/server) 
+        * cross-platform
+          * web
+          * mobile -- thanks to -- [React Native](https://reactnative.dev/)
 
 * React Components
   * := 👀 individual pieces ([button, entire page]) 👀 (=== | 1! file) / OWN

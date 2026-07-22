@@ -3,31 +3,17 @@ title: useActionState
 canary: true
 ---
 
-<Canary>
-
-The `useActionState` Hook is currently only available in React's Canary and experimental channels. Learn more about [release channels here](/community/versioning-policy#all-release-channels). In addition, you need to use a framework that supports [React Server Components](/reference/rsc/use-client) to get the full benefit of `useActionState`.
-
-</Canary>
-
-<Note>
-
-In earlier React Canary versions, this API was part of React DOM and called `useFormState`.
-
-</Note>
-
-<Intro>
-
-`useActionState` is a Hook that allows you to update state based on the result of a form action.
-
-```js
-const [state, formAction, isPending] = useActionState(fn, initialState, permalink?);
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useActionState`
+  * == React Hook /
+    * lets you
+      * update state -- based on the -- result of a form action
+  * requirements
+    * ⚠️React's Canary & [experimental channels](../../community/versioning-policy.md#all-release-channels-all-release-channels)⚠️
+      * | PREVIOUS React Canary versions,
+        * name: `useFormState`
+  * recommendations
+    * use a framework / supports [React Server Components](../rsc/use-client) 
+      * Reason:🧠get the FULL benefit of `useActionState`🧠
 
 ## Reference {/*reference*/}
 
@@ -35,7 +21,9 @@ const [state, formAction, isPending] = useActionState(fn, initialState, permalin
 
 {/* TODO T164397693: link to actions documentation once it exists */}
 
-Call `useActionState` at the top level of your component to create component state that is updated [when a form action is invoked](/reference/react-dom/components/form). You pass `useActionState` an existing form action function as well as an initial state, and it returns a new action that you use in your form, along with the latest form state and whether the Action is still pending. The latest form state is also passed to the function that you provided.
+Call `useActionState` at the top level of your component to create component state that is updated [when a form action is invoked](/reference/react-dom/components/form)
+* You pass `useActionState` an existing form action function as well as an initial state, and it returns a new action that you use in your form, along with the latest form state and whether the Action is still pending
+* The latest form state is also passed to the function that you provided.
 
 ```js
 import { useActionState } from "react";
@@ -55,11 +43,10 @@ function StatefulForm({}) {
 }
 ```
 
-The form state is the value returned by the action when the form was last submitted. If the form has not yet been submitted, it is the initial state that you pass.
+The form state is the value returned by the action when the form was last submitted
+* If the form has not yet been submitted, it is the initial state that you pass.
 
 If used with a Server Action, `useActionState` allows the server's response from submitting the form to be shown even before hydration has completed.
-
-[See more examples below.](#usage)
 
 #### Parameters {/*parameters*/}
 
@@ -71,16 +58,19 @@ If used with a Server Action, `useActionState` allows the server's response from
 
 #### Returns {/*returns*/}
 
-`useActionState` returns an array with the following values:
+* `[]` / contain the values
+  1. The current state. During the first render, it will match the `initialState` you have passed. After the action is invoked, it will match the value returned by the action.
+  2. A new action that you can pass as the `action` prop to your `form` component or `formAction` prop to any `button` component within the form.
+  3. The `isPending` flag that tells you whether there is a pending Transition.
 
-1. The current state. During the first render, it will match the `initialState` you have passed. After the action is invoked, it will match the value returned by the action.
-2. A new action that you can pass as the `action` prop to your `form` component or `formAction` prop to any `button` component within the form.
-3. The `isPending` flag that tells you whether there is a pending Transition.
+[state, formAction, isPending]
 
 #### Caveats {/*caveats*/}
 
-* When used with a framework that supports React Server Components, `useActionState` lets you make forms interactive before JavaScript has executed on the client. When used without Server Components, it is equivalent to component local state.
-* The function passed to `useActionState` receives an extra argument, the previous or initial state, as its first argument. This makes its signature different than if it were used directly as a form action without using `useActionState`.
+* When used with a framework that supports React Server Components, `useActionState` lets you make forms interactive before JavaScript has executed on the client
+* When used without Server Components, it is equivalent to component local state.
+* The function passed to `useActionState` receives an extra argument, the previous or initial state, as its first argument
+* This makes its signature different than if it were used directly as a form action without using `useActionState`.
 
 ---
 

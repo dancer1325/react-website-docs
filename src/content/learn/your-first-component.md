@@ -58,7 +58,7 @@ title: Your First Component
 #### Components all the way down {/*components-all-the-way-down*/}
 
 * "root" component
-  * NORMALLY, created automatically | start a NEW project
+  * NORMALLY, created AUTOMATICALLY | start a NEW project
 
 * ALL are React components
   * _Example:_ sidebars, lists, footers ... 

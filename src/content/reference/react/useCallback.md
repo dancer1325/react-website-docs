@@ -2,24 +2,16 @@
 title: useCallback
 ---
 
-<Intro>
-
-`useCallback` is a React Hook that lets you cache a function definition between re-renders.
-
-```js
-const cachedFn = useCallback(fn, dependencies)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useCallback`
+  * == React Hook /
+    * lets you
+      * BETWEEN re-renders, cache a function definition 
 
 ## Reference {/*reference*/}
 
 ### `useCallback(fn, dependencies)` {/*usecallback*/}
 
+TODO: 
 Call `useCallback` at the top level of your component to cache a function definition between re-renders:
 
 ```js {4,9}

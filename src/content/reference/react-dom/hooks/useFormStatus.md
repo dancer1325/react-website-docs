@@ -3,32 +3,20 @@ title: useFormStatus
 canary: true
 ---
 
-<Canary>
-
-The `useFormStatus` Hook is currently only available in React's Canary and experimental channels. Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
-
-</Canary>
-
-<Intro>
-
-`useFormStatus` is a Hook that gives you status information of the last form submission.
-
-```js
-const { pending, data, method, action } = useFormStatus();
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useFormStatus` 
+  * == Hook /
+    * requirements
+      * ⚠️React's Canary & [experimental channels](../../../community/versioning-policy.md#all-release-channels-all-release-channels)⚠️
+    * 's return
+      * LAST form submission's status information
+    * allows you to
+      * make updates | UI, -- based on the -- form's status
 
 ## Reference {/*reference*/}
 
 ### `useFormStatus()` {/*use-form-status*/}
 
-The `useFormStatus` Hook provides status information of the last form submission.
-
+TODO: 
 ```js {5},[[1, 6, "status.pending"]]
 import { useFormStatus } from "react-dom";
 import action from './actions';
@@ -59,7 +47,7 @@ In the above example, `Submit` uses this information to disable `<button>` press
 
 #### Returns {/*returns*/}
 
-A `status` object with the following properties:
+* A `status` object with the following properties:
 
 * `pending`: A boolean. If `true`, this means the parent `<form>` is pending submission. Otherwise, `false`.
 

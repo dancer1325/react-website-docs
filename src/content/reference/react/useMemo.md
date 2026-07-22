@@ -2,39 +2,15 @@
 title: useMemo
 ---
 
-<Intro>
-
-`useMemo` is a React Hook that lets you cache the result of a calculation between re-renders.
-
-```js
-const cachedValue = useMemo(calculateValue, dependencies)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `useMemo`
+  * == React Hook /
+    * lets you
+      * BETWEEN re-renders, cache the result of a calculation
+        * -> if the data has NOT changed since the PREVIOUS render -> React skips a re-render
 
 ## Reference {/*reference*/}
 
 ### `useMemo(calculateValue, dependencies)` {/*usememo*/}
-
-Call `useMemo` at the top level of your component to cache a calculation between re-renders:
-
-```js
-import { useMemo } from 'react';
-
-function TodoList({ todos, tab }) {
-  const visibleTodos = useMemo(
-    () => filterTodos(todos, tab),
-    [todos, tab]
-  );
-  // ...
-}
-```
-
-[See more examples below.](#usage)
 
 #### Parameters {/*parameters*/}
 
@@ -174,130 +150,6 @@ In this example, the `filterTodos` implementation is **artificially slowed down*
 Switching the tabs feels slow because it forces the slowed down `filterTodos` to re-execute. That's expected because the `tab` has changed, and so the entire calculation *needs* to re-run. (If you're curious why it runs twice, it's explained [here.](#my-calculation-runs-twice-on-every-re-render))
 
 Toggle the theme. **Thanks to `useMemo`, it's fast despite the artificial slowdown!** The slow `filterTodos` call was skipped because both `todos` and `tab` (which you pass as dependencies to `useMemo`) haven't changed since the last render.
-
-<Sandpack>
-
-```js src/App.js
-import { useState } from 'react';
-import { createTodos } from './utils.js';
-import TodoList from './TodoList.js';
-
-const todos = createTodos();
-
-export default function App() {
-  const [tab, setTab] = useState('all');
-  const [isDark, setIsDark] = useState(false);
-  return (
-    <>
-      <button onClick={() => setTab('all')}>
-        All
-      </button>
-      <button onClick={() => setTab('active')}>
-        Active
-      </button>
-      <button onClick={() => setTab('completed')}>
-        Completed
-      </button>
-      <br />
-      <label>
-        <input
-          type="checkbox"
-          checked={isDark}
-          onChange={e => setIsDark(e.target.checked)}
-        />
-        Dark mode
-      </label>
-      <hr />
-      <TodoList
-        todos={todos}
-        tab={tab}
-        theme={isDark ? 'dark' : 'light'}
-      />
-    </>
-  );
-}
-
-```
-
-```js src/TodoList.js active
-import { useMemo } from 'react';
-import { filterTodos } from './utils.js'
-
-export default function TodoList({ todos, theme, tab }) {
-  const visibleTodos = useMemo(
-    () => filterTodos(todos, tab),
-    [todos, tab]
-  );
-  return (
-    <div className={theme}>
-      <p><b>Note: <code>filterTodos</code> is artificially slowed down!</b></p>
-      <ul>
-        {visibleTodos.map(todo => (
-          <li key={todo.id}>
-            {todo.completed ?
-              <s>{todo.text}</s> :
-              todo.text
-            }
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-```
-
-```js src/utils.js
-export function createTodos() {
-  const todos = [];
-  for (let i = 0; i < 50; i++) {
-    todos.push({
-      id: i,
-      text: "Todo " + (i + 1),
-      completed: Math.random() > 0.5
-    });
-  }
-  return todos;
-}
-
-export function filterTodos(todos, tab) {
-  console.log('[ARTIFICIALLY SLOW] Filtering ' + todos.length + ' todos for "' + tab + '" tab.');
-  let startTime = performance.now();
-  while (performance.now() - startTime < 500) {
-    // Do nothing for 500 ms to emulate extremely slow code
-  }
-
-  return todos.filter(todo => {
-    if (tab === 'all') {
-      return true;
-    } else if (tab === 'active') {
-      return !todo.completed;
-    } else if (tab === 'completed') {
-      return todo.completed;
-    }
-  });
-}
-```
-
-```css
-label {
-  display: block;
-  margin-top: 10px;
-}
-
-.dark {
-  background-color: black;
-  color: white;
-}
-
-.light {
-  background-color: white;
-  color: black;
-}
-```
-
-</Sandpack>
-
-<Solution />
 
 #### Always recalculating a value {/*always-recalculating-a-value*/}
 

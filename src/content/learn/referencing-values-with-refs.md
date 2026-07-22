@@ -2,79 +2,35 @@
 title: 'Referencing Values with Refs'
 ---
 
-<Intro>
+* goal
+  * how to 
+    * add a ref | your component
+    * update a ref's value
+    * refs != state
+    * use refs safely
 
-When you want a component to "remember" some information, but you don't want that information to [trigger new renders](/learn/render-and-commit), you can use a *ref*.
+## Adding a ref | your component {/*adding-a-ref-to-your-component*/}
 
-</Intro>
+* steps
+  * import the `useRef` Hook
+  * call `useRef(initialValue)` /
+    * [`useRef` API](../reference/react/useRef.md)
+* TODO: It's like a secret pocket of your component that React doesn't track
+* (This is what makes it an "escape hatch" from React's one-way data flow--more on that below!)
 
-<YouWillLearn>
+The ref points to a number, but, like [state](/learn/state-a-components-memory), you could point to anything: a string, an object, or even a function
+* Unlike state, ref is a plain JavaScript object with the `current` property that you can read and modify.
 
-- How to add a ref to your component
-- How to update a ref's value
-- How refs are different from state
-- How to use refs safely
-
-</YouWillLearn>
-
-## Adding a ref to your component {/*adding-a-ref-to-your-component*/}
-
-You can add a ref to your component by importing the `useRef` Hook from React:
-
-```js
-import { useRef } from 'react';
-```
-
-Inside your component, call the `useRef` Hook and pass the initial value that you want to reference as the only argument. For example, here is a ref to the value `0`:
-
-```js
-const ref = useRef(0);
-```
-
-`useRef` returns an object like this:
-
-```js
-{ 
-  current: 0 // The value you passed to useRef
-}
-```
-
-<Illustration src="/images/docs/illustrations/i_ref.png" alt="An arrow with 'current' written on it stuffed into a pocket with 'ref' written on it." />
-
-You can access the current value of that ref through the `ref.current` property. This value is intentionally mutable, meaning you can both read and write to it. It's like a secret pocket of your component that React doesn't track. (This is what makes it an "escape hatch" from React's one-way data flow--more on that below!)
-
-Here, a button will increment `ref.current` on every click:
-
-<Sandpack>
-
-```js
-import { useRef } from 'react';
-
-export default function Counter() {
-  let ref = useRef(0);
-
-  function handleClick() {
-    ref.current = ref.current + 1;
-    alert('You clicked ' + ref.current + ' times!');
-  }
-
-  return (
-    <button onClick={handleClick}>
-      Click me!
-    </button>
-  );
-}
-```
-
-</Sandpack>
-
-The ref points to a number, but, like [state](/learn/state-a-components-memory), you could point to anything: a string, an object, or even a function. Unlike state, ref is a plain JavaScript object with the `current` property that you can read and modify.
-
-Note that **the component doesn't re-render with every increment.** Like state, refs are retained by React between re-renders. However, setting state re-renders a component. Changing a ref does not!
+Note that **the component doesn't re-render with every increment.** Like state, refs are retained by React between re-renders
+* However, setting state re-renders a component
+* Changing a ref does not!
 
 ## Example: building a stopwatch {/*example-building-a-stopwatch*/}
 
-You can combine refs and state in a single component. For example, let's make a stopwatch that the user can start or stop by pressing a button. In order to display how much time has passed since the user pressed "Start", you will need to keep track of when the Start button was pressed and what the current time is. **This information is used for rendering, so you'll keep it in state:**
+You can combine refs and state in a single component
+* For example, let's make a stopwatch that the user can start or stop by pressing a button
+* In order to display how much time has passed since the user pressed "Start", you will need to keep track of when the Start button was pressed and what the current time is
+* **This information is used for rendering, so you'll keep it in state:**
 
 ```js
 const [startTime, setStartTime] = useState(null);
@@ -121,7 +77,10 @@ export default function Stopwatch() {
 
 </Sandpack>
 
-When the "Stop" button is pressed, you need to cancel the existing interval so that it stops updating the `now` state variable. You can do this by calling [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval), but you need to give it the interval ID that was previously returned by the `setInterval` call when the user pressed Start. You need to keep the interval ID somewhere. **Since the interval ID is not used for rendering, you can keep it in a ref:**
+When the "Stop" button is pressed, you need to cancel the existing interval so that it stops updating the `now` state variable
+* You can do this by calling [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval), but you need to give it the interval ID that was previously returned by the `setInterval` call when the user pressed Start
+* You need to keep the interval ID somewhere
+* **Since the interval ID is not used for rendering, you can keep it in a ref:**
 
 <Sandpack>
 
@@ -168,11 +127,15 @@ export default function Stopwatch() {
 
 </Sandpack>
 
-When a piece of information is used for rendering, keep it in state. When a piece of information is only needed by event handlers and changing it doesn't require a re-render, using a ref may be more efficient.
+When a piece of information is used for rendering, keep it in state
+* When a piece of information is only needed by event handlers and changing it doesn't require a re-render, using a ref may be more efficient.
 
 ## Differences between refs and state {/*differences-between-refs-and-state*/}
 
-Perhaps you're thinking refs seem less "strict" than state—you can mutate them instead of always having to use a state setting function, for instance. But in most cases, you'll want to use state. Refs are an "escape hatch" you won't need often. Here's how state and refs compare:
+Perhaps you're thinking refs seem less "strict" than state—you can mutate them instead of always having to use a state setting function, for instance
+* But in most cases, you'll want to use state
+* Refs are an "escape hatch" you won't need often
+* Here's how state and refs compare:
 
 | refs                                                                                  | state                                                                                                                     |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -254,9 +217,13 @@ React provides a built-in version of `useRef` because it is common enough in pra
 
 </DeepDive>
 
-## When to use refs {/*when-to-use-refs*/}
+## use case {/*when-to-use-refs*/}
 
-Typically, you will use a ref when your component needs to "step outside" React and communicate with external APIs—often a browser API that won't impact the appearance of the component. Here are a few of these rare situations:
+* you want a component / "remember" SOME information WITHOUT [trigger NEW renders](render-and-commit)
+
+TODO: 
+Typically, you will use a ref when your component needs to "step outside" React and communicate with external APIs—often a browser API that 
+won't impact the appearance of the component. Here are a few of these rare situations:
 
 - Storing [timeout IDs](https://developer.mozilla.org/docs/Web/API/setTimeout)
 - Storing and manipulating [DOM elements](https://developer.mozilla.org/docs/Web/API/Element), which we cover on [the next page](/learn/manipulating-the-dom-with-refs)

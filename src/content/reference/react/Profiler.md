@@ -2,44 +2,31 @@
 title: <Profiler>
 ---
 
-<Intro>
-
-`<Profiler>` lets you measure rendering performance of a React tree programmatically.
-
-```js
-<Profiler id="App" onRender={onRender}>
-  <App />
-</Profiler>
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `<Profiler>`
+  * == React built-in component /
+    * lets you
+      * measure PROGRAMMATICALLY React tree's rendering performance
 
 ## Reference {/*reference*/}
 
 ### `<Profiler>` {/*profiler*/}
 
-Wrap a component tree in a `<Profiler>` to measure its rendering performance.
-
-```js
-<Profiler id="App" onRender={onRender}>
-  <App />
-</Profiler>
-```
+* how to use?
+  * wrap a component tree | `<Profiler>`
 
 #### Props {/*props*/}
 
-* `id`: A string identifying the part of the UI you are measuring.
-* `onRender`: An [`onRender` callback](#onrender-callback) that React calls every time components within the profiled tree update. It receives information about what was rendered and how much time it took.
+* `id: String`
+  * == part of the UI / you are measuring
+* `onRender`
+  * == [`onRender` callback](#onrender-callback-onrender-callback) /
+    * TODO: React calls every time components within the profiled tree update
+    * It receives information about what was rendered and how much time it took.
 
 #### Caveats {/*caveats*/}
 
-* Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
-
----
+* Profiling adds some additional overhead, so **it is disabled in the production build by default.** 
+* To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
 
 ### `onRender` callback {/*onrender-callback*/}
 
@@ -87,7 +74,9 @@ Profiling adds some additional overhead, so **it is disabled in the production b
 
 <Note>
 
-`<Profiler>` lets you gather measurements programmatically. If you're looking for an interactive profiler, try the Profiler tab in [React Developer Tools](/learn/react-developer-tools). It exposes similar functionality as a browser extension.
+`<Profiler>` lets you gather measurements programmatically
+* If you're looking for an interactive profiler, try the Profiler tab in [React Developer Tools](/learn/react-developer-tools)
+* It exposes similar functionality as a browser extension.
 
 </Note>
 
@@ -126,7 +115,8 @@ You can also nest `<Profiler>` components:
 </App>
 ```
 
-Although `<Profiler>` is a lightweight component, it should be used only when necessary. Each use adds some CPU and memory overhead to an application.
+Although `<Profiler>` is a lightweight component, it should be used only when necessary
+* Each use adds some CPU and memory overhead to an application.
 
 ---
 

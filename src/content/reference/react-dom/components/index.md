@@ -2,45 +2,41 @@
 title: "React DOM Components"
 ---
 
-* React supports ALL browser built-in
-  * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) components
-  * [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components
+* React 
+  * supports
+    * ALL browser built-in
+      * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) components
+      * [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components
 
 ## Common components {/*common-components*/}
 
-* ALL built-in browser components support SOME
-  * props
-    * _Example:_ `ref`, `dangerouslySetInnerHTML` 
-  * events
-
-* see [here](common.md)
+* == [built-in browser components / ONLY have COMMON props & events](common.md)
 
 ## Form components {/*form-components*/}
 
-* TODO:
-These built-in browser components accept user input:
-
-* [`<input>`](/reference/react-dom/components/input)
-* [`<select>`](/reference/react-dom/components/select)
-* [`<textarea>`](/reference/react-dom/components/textarea)
-
-They are special in React because passing the `value` prop to them makes them *[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
-
----
+* == built-in browser components / accept user input
+  * are
+    * [`<input>`](input)
+    * [`<select>`](select)
+    * [`<textarea>`](textarea)
+  * if you pass the `value` prop to them -> you can [control them](input.md#controlling-an-input----via-a----state-variable-controlling-an-input-with-a-state-variable)
 
 ## Resource and Metadata Components {/*resource-and-metadata-components*/}
 
-These built-in browser components let you load external resources or annotate the document with metadata:
-
-* [`<link>`](/reference/react-dom/components/link)
-* [`<meta>`](/reference/react-dom/components/meta)
-* [`<script>`](/reference/react-dom/components/script)
-* [`<style>`](/reference/react-dom/components/style)
-* [`<title>`](/reference/react-dom/components/title)
-
-They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
-
----
+* == built-in browser components / 
+  * let you 
+    * load EXTERNAL resources, OR
+    * annotate the document -- with -- metadata
+  * are
+    * [`<link>`](link)
+    * [`<meta>`](meta)
+    * [`<script>`](script)
+    * [`<style>`](style)
+    * [`<title>`](title)
+  * can be
+    * render them | document head
+    * suspend | load resources
+    * enact other behaviors 
 
 ## ALL HTML components / supported by React{/*all-html-components*/} 
 
@@ -86,7 +82,7 @@ They are special in React because React can render them into the document head, 
 * [`<i>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)
 * [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
 * [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
-* [`<input>`](/reference/react-dom/components/input)
+* [`<input>`](input)
 * [`<ins>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins)
 * [`<kbd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)
 * [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)
@@ -104,12 +100,12 @@ They are special in React because React can render them into the document head, 
 * [`<object>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object)
 * [`<ol>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)
 * [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup)
-* [`<option>`](/reference/react-dom/components/option)
+* [`<option>`](option)
 * [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output)
 * [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p)
 * [`<picture>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
 * [`<pre>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre)
-* [`<progress>`](/reference/react-dom/components/progress)
+* [`<progress>`](progress)
 * [`<q>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q)
 * [`<rp>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rp)
 * [`<rt>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rt)
@@ -118,7 +114,7 @@ They are special in React because React can render them into the document head, 
 * [`<samp>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp)
 * [`<script>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)
 * [`<section>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section)
-* [`<select>`](/reference/react-dom/components/select)
+* [`<select>`](select)
 * [`<slot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot)
 * [`<small>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small)
 * [`<source>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source)
@@ -132,7 +128,7 @@ They are special in React because React can render them into the document head, 
 * [`<tbody>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody)
 * [`<td>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td)
 * [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
-* [`<textarea>`](/reference/react-dom/components/textarea)
+* [`<textarea>`](textarea)
 * [`<tfoot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot)
 * [`<th>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th)
 * [`<thead>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead)
@@ -146,42 +142,34 @@ They are special in React because React can render them into the document head, 
 * [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video)
 * [`<wbr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr)
 
-<Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. 
-For example, you'll write `tabIndex` instead of `tabindex`.
-You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
+* React
+  * uses a `camelCase` convention -- for -- prop names
+    * == [DOM standard](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
-</Note>
-
----
+* [ONLINE converter FROM HTML -- to -- JSX](https://transform.tools/html-to-jsx)
 
 ### Custom HTML elements {/*custom-html-elements*/}
 
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) In React, rendering custom elements works differently from rendering built-in browser tags:
+* [CUSTOM HTML element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
+  * ways / React treat as CUSTOM one
+    * use a tag with a dash
+      * _Example:_ `<my-element>`
+      * ❌!= render BUILT-in browser tags❌
+    * built-in browser HTML element + [`is` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is)
+  * 's props
+    * are serialized -- to -- strings
+    * are ALWAYS set -- by -- using attributes
+    * `class`
+      * rather than `className`
+    * `for`
+      * rather than `htmlFor`
+  * | [FUTURE React versions](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
+    * if you want to try -> use React experimental version
+      * `react@experimental`
+      * `react-dom@experimental`
 
-- All custom element props are serialized to strings and are always set using attributes.
-- Custom elements accept `class` rather than `className`, and `for` rather than `htmlFor`.
-
-If you render a built-in browser HTML element with an [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribute, it will also be treated as a custom element.
-
-<Note>
-
-[A future version of React will include more comprehensive support for custom elements.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
-
-You can try it by upgrading React packages to the most recent experimental version:
-
-- `react@experimental`
-- `react-dom@experimental`
-
-Experimental versions of React may contain bugs. Don't use them in production.
-
-</Note>
----
-
-## All SVG components {/*all-svg-components*/}
-
-React supports all built-in browser SVG components. This includes:
+## ALL SVG components {/*all-svg-components*/}
 
 * [`<a>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/a)
 * [`<animate>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animate)
@@ -250,22 +238,23 @@ React supports all built-in browser SVG components. This includes:
 * [`<use>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/use)
 * [`<view>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/view)
 
-<Note>
+* prop names
+  * follow `camelCase` convention
+    * _Example:_ `tabIndex` instead of `tabindex` 
+    * == [DOM standard](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)  
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing SVG to JSX with an [online converter.](https://transform.tools/)
+* [ONLINE converter FROM SVG -- to -- JSX](https://transform.tools)
 
-Namespaced attributes also have to be written without the colon:
-
-* `xlink:actuate` becomes `xlinkActuate`.
-* `xlink:arcrole` becomes `xlinkArcrole`.
-* `xlink:href` becomes `xlinkHref`.
-* `xlink:role` becomes `xlinkRole`.
-* `xlink:show` becomes `xlinkShow`.
-* `xlink:title` becomes `xlinkTitle`.
-* `xlink:type` becomes `xlinkType`.
-* `xml:base` becomes `xmlBase`.
-* `xml:lang` becomes `xmlLang`.
-* `xml:space` becomes `xmlSpace`.
-* `xmlns:xlink` becomes `xmlnsXlink`.
-
-</Note>
+* Namespaced attributes
+  * WITHOUT colon
+    * `xlink:actuate` `->` `xlinkActuate`
+    * `xlink:arcrole` -> `xlinkArcrole`
+    * `xlink:href` -> `xlinkHref`
+    * `xlink:role` -> `xlinkRole`
+    * `xlink:show` -> `xlinkShow`
+    * `xlink:title` -> `xlinkTitle`
+    * `xlink:type` -> `xlinkType`
+    * `xml:base` -> `xmlBase`
+    * `xml:lang` -> `xmlLang`
+    * `xml:space` -> `xmlSpace`
+    * `xmlns:xlink` -> `xmlnsXlink`

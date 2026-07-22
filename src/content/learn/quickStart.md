@@ -22,7 +22,7 @@ title: Quick Start
   * if you want to return SEVERAL -> wrap them into a shared parent (_Example:_ `<div>...</div>` or `<>...</>`)
     * _Example:_ [`AboutPage`](/samples/getStarted/quick-start)
 
-* [online converter from HTML -- to -- JSX](https://transform.tools/html-to-jsx)
+* [ONLINE converter FROM HTML -- to -- JSX](https://transform.tools/html-to-jsx)
 
 ## Adding styles {/*adding-styles*/}
 
