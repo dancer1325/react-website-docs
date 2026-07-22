@@ -3,50 +3,38 @@ title: use
 canary: true
 ---
 
-<Canary>
-
-The `use` API is currently only available in React's Canary and experimental channels. Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
-
-</Canary>
-
-<Intro>
-
-`use` is a React API that lets you read the value of a resource like a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
-
-```js
-const value = use(resource);
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `use`
+  * == React's built-in React APIs /
+    * let you
+      * | resource, read a value
+  * requirements
+    * ⚠️React's Canary & [experimental channels](../../community/versioning-policy.md#all-release-channels-all-release-channels)⚠️
+  * vs React Hooks
+    * `use`
+      * can be called |
+        * loops
+        * conditional statements 
+          * _Example:_ `if`
+    * TODO: Like React Hooks, the function that calls `use` must be a Component or Hook.
 
 ## Reference {/*reference*/}
 
 ### `use(resource)` {/*use*/}
 
-Call `use` in your component to read the value of a resource like a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
-
-```jsx
-import { use } from 'react';
-
-function MessageComponent({ messagePromise }) {
-  const message = use(messagePromise);
-  const theme = use(ThemeContext);
-  // ...
-```
-
-Unlike React Hooks, `use` can be called within loops and conditional statements like `if`. Like React Hooks, the function that calls `use` must be a Component or Hook.
-
-When called with a Promise, the `use` API integrates with [`Suspense`](/reference/react/Suspense) and [error boundaries](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). The component calling `use` *suspends* while the Promise passed to `use` is pending. If the component that calls `use` is wrapped in a Suspense boundary, the fallback will be displayed.  Once the Promise is resolved, the Suspense fallback is replaced by the rendered components using the data returned by the `use` API. If the Promise passed to `use` is rejected, the fallback of the nearest Error Boundary will be displayed.
-
-[See more examples below.](#usage)
+TODO: When called with a Promise, the `use` API integrates with [`Suspense`](/reference/react/Suspense) and [error boundaries](/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
+The component calling `use` *suspends* while the Promise passed to `use` is pending
+* If the component that calls `use` is wrapped in a Suspense boundary, the fallback will be displayed
+*  Once the Promise is resolved, the Suspense fallback is replaced by the rendered components
+using the data returned by the `use` API
+* If the Promise passed to `use` is rejected, the fallback of the nearest Error Boundary will be displayed.
 
 #### Parameters {/*parameters*/}
 
-* `resource`: this is the source of the data you want to read a value from. A resource can be a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or a [context](/learn/passing-data-deeply-with-context).
+* `resource`
+  * == source of the data | you want to read a value
+  * ALLOWED
+    * [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 
+    * [context](../../learn/passing-data-deeply-with-context)
 
 #### Returns {/*returns*/}
 

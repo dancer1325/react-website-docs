@@ -2,53 +2,55 @@
 title: memo
 ---
 
-<Intro>
-
-`memo` lets you skip re-rendering a component when its props are unchanged.
-
-```
-const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `memo`
+  * == React's built-in React APIs
+    * lets you
+      * if React component's props are unchanged -> skip re-rendering
+  * how does it work?
+    * memoize a version of the component
+  * use cases
+    * parent component is re-rendered BUT children components's props do NOT change 
+  * enable
+    * performance optimization
 
 ## Reference {/*reference*/}
 
 ### `memo(Component, arePropsEqual?)` {/*memo*/}
 
-Wrap a component in `memo` to get a *memoized* version of that component. This memoized version of your component will usually not be re-rendered when its parent component is re-rendered as long as its props have not changed. But React may still re-render it: memoization is a performance optimization, not a guarantee.
-
-```js
-import { memo } from 'react';
-
-const SomeComponent = memo(function SomeComponent(props) {
-  // ...
-});
-```
-
-[See more examples below.](#usage)
-
 #### Parameters {/*parameters*/}
 
-* `Component`: The component that you want to memoize. The `memo` does not modify this component, but returns a new, memoized component instead. Any valid React component, including functions and [`forwardRef`](/reference/react/forwardRef) components, is accepted.
+* `Component`
+  * == component / 
+    * you want to memoize
+    * ALLOWED ANY React component
+      * EVEN 
+        * functions
+        * [`forwardRef` components](forwardRef)
 
-* **optional** `arePropsEqual`: A function that accepts two arguments: the component's previous props, and its new props. It should return `true` if the old and new props are equal: that is, if the component will render the same output and behave in the same way with the new props as with the old. Otherwise it should return `false`. Usually, you will not specify this function. By default, React will compare each prop with [`Object.is`.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+* `arePropsEqual`
+  * == function / 
+    * ALLOWED arguments
+      * component's PREVIOUS props
+      * component's NEW props
+    * 's return
+      * if component's PREVIOUS props == component's NEW props -> return `true`
+      * OTHERWISE, return `false`
+  * OPTIONAL
+    * if you do NOT specify ->  React compares component's PREVIOUS props -- , with [`Object.is`.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is), vs -- component's NEW props  
 
 #### Returns {/*returns*/}
 
-`memo` returns a new React component. It behaves the same as the component provided to `memo` except that React will not always re-render it when its parent is being re-rendered unless its props have changed.
-
----
+* a NEW React component
+  * == ❌NOT modify EXISTING component❌
 
 ## Usage {/*usage*/}
 
 ### Skipping re-rendering when props are unchanged {/*skipping-re-rendering-when-props-are-unchanged*/}
 
-React normally re-renders a component whenever its parent re-renders. With `memo`, you can create a component that React will not re-render when its parent re-renders so long as its new props are the same as the old props. Such a component is said to be *memoized*.
+* TODO:
+React normally re-renders a component whenever its parent re-renders
+* With `memo`, you can create a component that React will not re-render when its parent re-renders so long as its new props are the same as the old props
+* Such a component is said to be *memoized*.
 
 To memoize a component, wrap it in `memo` and use the value that it returns in place of your original component:
 
@@ -114,7 +116,10 @@ label {
 
 If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful. 
 
-Optimizing with `memo`  is only valuable when your component re-renders often with the same exact props, and its re-rendering logic is expensive. If there is no perceptible lag when your component re-renders, `memo` is unnecessary. Keep in mind that `memo` is completely useless if the props passed to your component are *always different,* such as if you pass an object or a plain function defined during rendering. This is why you will often need [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) and [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) together with `memo`.
+Optimizing with `memo`  is only valuable when your component re-renders often with the same exact props, and its re-rendering logic is expensive. If there is no perceptible lag when your component re-renders, `memo` is unnecessary. Keep in mind that `memo` is completely useless if the props passed to your component are *always different,* such as if you pass an object or a plain function defined during rendering
+* COMMONLY used with
+  * [`useMemo`](useMemo.md#skipping-re-rendering-of-components-skipping-re-rendering-of-components) 
+  * [`useCallback`](useCallback.md#skipping-re-rendering-of-components-skipping-re-rendering-of-components)
 
 There is no benefit to wrapping a component in `memo` in other cases. There is no significant harm to doing that either, so some teams choose to not think about individual cases, and memoize as much as possible. The downside of this approach is that code becomes less readable. Also, not all memoization is effective: a single value that's "always new" is enough to break memoization for an entire component.
 

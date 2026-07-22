@@ -2,48 +2,26 @@
 title: createRoot
 ---
 
-* TODO:
-
-<Intro>
-
-`createRoot` lets you create a root to display React components inside a browser DOM node.
-
-```js
-const root = createRoot(domNode, options?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `createRoot` 
+  * == React's built-in React APIs
+    * lets you 
+      * create a root -- to -- display React components | browser DOM node
+  * use cases
+    * AFTERWARD, display a React component
+      * -- by -- calling [`root.render`](#rootrenderreactnode-root-render)
+    * | FULLY React app,
+      * `createRoot` is used 1!
+    * | apps / partially use React,
+      * there could be >1 `createRoot`
 
 ## Reference {/*reference*/}
 
 ### `createRoot(domNode, options?)` {/*createroot*/}
 
-Call `createRoot` to create a React root for displaying content inside a browser DOM element.
-
-```js
-import { createRoot } from 'react-dom/client';
-
-const domNode = document.getElementById('root');
-const root = createRoot(domNode);
-```
-
-React will create a root for the `domNode`, and take over managing the DOM inside it. After you've created a root, you need to call [`root.render`](#root-render) to display a React component inside of it:
-
-```js
-root.render(<App />);
-```
-
-An app fully built with React will usually only have one `createRoot` call for its root component. A page that uses "sprinkles" of React for parts of the page may have as many separate roots as needed.
-
-[See more examples below.](#usage)
-
 #### Parameters {/*parameters*/}
 
-* `domNode`: A [DOM element.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React will create a root for this DOM element and allow you to call functions on the root, such as `render` to display rendered React content.
+* `domNode`
+  * TODO: A [DOM element.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React will create a root for this DOM element and allow you to call functions on the root, such as `render` to display rendered React content.
 
 * **optional** `options`: An object with options for this React root.
 
@@ -54,7 +32,10 @@ An app fully built with React will usually only have one `createRoot` call for i
 
 #### Returns {/*returns*/}
 
-`createRoot` returns an object with two methods: [`render`](#root-render) and [`unmount`.](#root-unmount)
+* object /
+  * built-in methods
+    * [`.render(reactNode)`](#rootrenderreactnode-root-render)
+    * [`.unmount()`](#rootunmount-root-unmount)
 
 #### Caveats {/*caveats*/}
 * If your app is server-rendered, using `createRoot()` is not supported. Use [`hydrateRoot()`](/reference/react-dom/client/hydrateRoot) instead.
@@ -96,11 +77,8 @@ React will display `<App />` in the `root`, and take over managing the DOM insid
 
 ### `root.unmount()` {/*root-unmount*/}
 
-Call `root.unmount` to destroy a rendered tree inside a React root.
+* destroy a rendered tree | React root
 
-```js
-root.unmount();
-```
 
 An app fully built with React will usually not have any calls to `root.unmount`.
 

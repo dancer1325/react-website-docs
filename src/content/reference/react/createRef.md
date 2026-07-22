@@ -19,11 +19,7 @@ class MyInput extends Component {
 }
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+creates a ref object which can contain arbitrary value.
 
 ## Reference {/*reference*/}
 

@@ -10,11 +10,7 @@ title: createElement
 const element = createElement(type, props, ...children)
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+lets you create a React element. Typically, you'll use JSX instead.
 
 ## Reference {/*reference*/}
 

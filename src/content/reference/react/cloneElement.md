@@ -16,11 +16,7 @@ Using `cloneElement` is uncommon and can lead to fragile code. [See common alter
 const clonedElement = cloneElement(element, props, ...children)
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+lets you create a React element using another element as a starting point
 
 ## Reference {/*reference*/}
 

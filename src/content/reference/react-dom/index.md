@@ -6,6 +6,12 @@ title: React DOM APIs
   * == methods / supported by
     * web applications (== / run | browser DOM environment)
     * ❌NOT by React Native ❌
+  * are
+    * [Hooks](hooks)
+    * [Components](components)
+    * [APIs](../react/apis.md)
+    * [Client APIs](client)
+    * [Server APIs](server)
 
 ## APIs {/*apis*/}
 

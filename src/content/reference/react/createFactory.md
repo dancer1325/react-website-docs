@@ -16,11 +16,7 @@ This API will be removed in a future major version of React. [See the alternativ
 const factory = createFactory(type)
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+lets you create a function that produces React elements of a certain type.
 
 ## Reference {/*reference*/}
 
@@ -50,11 +46,13 @@ export default function App() {
 
 #### Parameters {/*parameters*/}
 
-* `type`: The `type` argument must be a valid React component type. For example, it could be a tag name string (such as `'div'` or `'span'`), or a React component (a function, a class, or a special component like [`Fragment`](/reference/react/Fragment)).
+* `type`: The `type` argument must be a valid React component type
+* For example, it could be a tag name string (such as `'div'` or `'span'`), or a React component (a function, a class, or a special component like [`Fragment`](/reference/react/Fragment)).
 
 #### Returns {/*returns*/}
 
-Returns a factory function. That factory function receives a `props` object as the first argument, followed by a list of `...children` arguments, and returns a React element with the given `type`, `props` and `children`.
+Returns a factory function
+* That factory function receives a `props` object as the first argument, followed by a list of `...children` arguments, and returns a React element with the given `type`, `props` and `children`.
 
 ---
 
@@ -62,7 +60,8 @@ Returns a factory function. That factory function receives a `props` object as t
 
 ### Creating React elements with a factory {/*creating-react-elements-with-a-factory*/}
 
-Although most React projects use [JSX](/learn/writing-markup-with-jsx) to describe the user interface, JSX is not required. In the past, `createFactory` used to be one of the ways you could describe the user interface without JSX.
+Although most React projects use [JSX](/learn/writing-markup-with-jsx) to describe the user interface, JSX is not required
+* In the past, `createFactory` used to be one of the ways you could describe the user interface without JSX.
 
 Call `createFactory` to create a *factory function* for a specific element type like `'button'`:
 
@@ -92,7 +91,9 @@ export default function App() {
 
 </Sandpack>
 
-This is how `createFactory` was used as an alternative to JSX. However, `createFactory` is deprecated, and you should not call `createFactory` in any new code. See how to migrate away from `createFactory` below.
+This is how `createFactory` was used as an alternative to JSX
+* However, `createFactory` is deprecated, and you should not call `createFactory` in any new code
+* See how to migrate away from `createFactory` below.
 
 ---
 
@@ -134,7 +135,8 @@ This lets you keep all of your code unchanged except the imports.
 
 ### Replacing `createFactory` with `createElement` {/*replacing-createfactory-with-createelement*/}
 
-If you have a few `createFactory` calls that you don't mind porting manually, and you don't want to use JSX, you can replace every call a factory function with a [`createElement`](/reference/react/createElement) call. For example, you can replace this code:
+If you have a few `createFactory` calls that you don't mind porting manually, and you don't want to use JSX, you can replace every call a factory function with a [`createElement`](/reference/react/createElement) call
+* For example, you can replace this code:
 
 ```js {1,3,6}
 import { createFactory } from 'react';
@@ -187,7 +189,8 @@ export default function App() {
 
 ### Replacing `createFactory` with JSX {/*replacing-createfactory-with-jsx*/}
 
-Finally, you can use JSX instead of `createFactory`. This is the most common way to use React:
+Finally, you can use JSX instead of `createFactory`
+* This is the most common way to use React:
 
 <Sandpack>
 

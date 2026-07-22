@@ -20,11 +20,7 @@ class Greeting extends PureComponent {
 }
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+is similar to [`Component`,](Component) but it skip re-renders with same props.
 
 ## Reference {/*reference*/}
 

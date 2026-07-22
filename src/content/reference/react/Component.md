@@ -20,11 +20,7 @@ class Greeting extends Component {
 }
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+lets you define a React component as a JavaScript class.
 
 ## Reference {/*reference*/}
 

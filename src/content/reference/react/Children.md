@@ -21,11 +21,7 @@ const mappedChildren = Children.map(children, child =>
 
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+lets you manipulate and transform the JSX received as the `children` prop
 
 ## Reference {/*reference*/}
 

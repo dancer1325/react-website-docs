@@ -10,11 +10,7 @@ title: isValidElement
 const isElement = isValidElement(value)
 ```
 
-</Intro>
-
-<InlineToc />
-
----
+checks whether a value is a React element. Typically used with [`cloneElement`.](cloneElement)
 
 ## Reference {/*reference*/}
 

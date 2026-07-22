@@ -2,13 +2,15 @@
 title: Rules of Hooks
 ---
 
-<Intro>
+* Hooks are defined using JavaScript functions, but they represent a special type of reusable UI logic with restrictions on where they can be called.
+
 Hooks are defined using JavaScript functions, but they represent a special type of reusable UI logic with restrictions on where they can be called.
-</Intro>
 
-<InlineToc />
+Hooks are defined using JavaScript functions, but they represent a special type of reusable UI logic with restrictions on where they can be called
+You need to follow the [Rules of Hooks](/reference/rules/rules-of-hooks) when using them.
 
----
+* [Only call Hooks at the top level](/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) – Don’t call Hooks inside loops, conditions, or nested functions. Instead, always use Hooks at the top level of your React function, before any early returns.
+* [Only call Hooks from React functions](/reference/rules/rules-of-hooks#only-call-hooks-from-react-functions) – Don’t call Hooks from regular JavaScript functions.
 
 ##  Only call Hooks at the top level {/*only-call-hooks-at-the-top-level*/}
 

@@ -2,46 +2,25 @@
 title: startTransition
 ---
 
-<Intro>
-
-`startTransition` lets you update the state without blocking the UI.
-
-```js
-startTransition(scope)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `startTransition` 
+  * == React's built-in React APIs
+    * lets you
+      * update the state WITHOUT blocking the UI
+      * mark a state update -- as a -- Transition
+  * vs [`useTransition`](useTransition)
+    * ❌`startTransition` does NOT provide the `isPending` flag❌
+  * use cases
+    * if `useTransition` is NOT available -> use `startTransition`
+    * outside components
 
 ## Reference {/*reference*/}
 
 ### `startTransition(scope)` {/*starttransitionscope*/}
 
-The `startTransition` function lets you mark a state update as a Transition.
-
-```js {7,9}
-import { startTransition } from 'react';
-
-function TabContainer() {
-  const [tab, setTab] = useState('about');
-
-  function selectTab(nextTab) {
-    startTransition(() => {
-      setTab(nextTab);
-    });
-  }
-  // ...
-}
-```
-
-[See more examples below.](#usage)
-
 #### Parameters {/*parameters*/}
 
-* `scope`: A function that updates some state by calling one or more [`set` functions.](/reference/react/useState#setstate) React immediately calls `scope` with no arguments and marks all state updates scheduled synchronously during the `scope` function call as Transitions. They will be [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](/reference/react/useTransition#preventing-unwanted-loading-indicators)
+* `scope`
+  * TODO: A function that updates some state by calling one or more [`set` functions.](/reference/react/useState#setstate) React immediately calls `scope` with no arguments and marks all state updates scheduled synchronously during the `scope` function call as Transitions. They will be [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](/reference/react/useTransition#preventing-unwanted-loading-indicators)
 
 #### Returns {/*returns*/}
 
@@ -61,37 +40,12 @@ function TabContainer() {
 
 * If there are multiple ongoing Transitions, React currently batches them together. This is a limitation that will likely be removed in a future release.
 
----
-
 ## Usage {/*usage*/}
 
 ### Marking a state update as a non-blocking Transition {/*marking-a-state-update-as-a-non-blocking-transition*/}
 
-You can mark a state update as a *Transition* by wrapping it in a `startTransition` call:
-
-```js {7,9}
-import { startTransition } from 'react';
-
-function TabContainer() {
-  const [tab, setTab] = useState('about');
-
-  function selectTab(nextTab) {
-    startTransition(() => {
-      setTab(nextTab);
-    });
-  }
-  // ...
-}
-```
-
 Transitions let you keep the user interface updates responsive even on slow devices.
 
-With a Transition, your UI stays responsive in the middle of a re-render. For example, if the user clicks a tab but then change their mind and click another tab, they can do that without waiting for the first re-render to finish.
+With a Transition, your UI stays responsive in the middle of a re-render
+* For example, if the user clicks a tab but then change their mind and click another tab, they can do that without waiting for the first re-render to finish.
 
-<Note>
-
-`startTransition` is very similar to [`useTransition`](/reference/react/useTransition), except that it does not provide the `isPending` flag to track whether a Transition is ongoing. You can call `startTransition` when `useTransition` is not available. For example, `startTransition` works outside components, such as from a data library.
-
-[Learn about Transitions and see examples on the `useTransition` page.](/reference/react/useTransition)
-
-</Note>

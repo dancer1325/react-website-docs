@@ -4,11 +4,14 @@ title: React calls Components and Hooks
 
 <Intro>
 React is responsible for rendering components and Hooks when necessary to optimize the user experience. It is declarative: you tell React what to render in your component’s logic, and React will figure out how best to display it to your user.
-</Intro>
 
-<InlineToc />
+React is responsible for rendering components and hooks when necessary to optimize the user experience.
 
----
+It is declarative: you tell React what to render in your component’s logic, and React will figure out how best to display it to your user.
+
+* [Never call component functions directly](/reference/rules/react-calls-components-and-hooks#never-call-component-functions-directly) – Components should only be used in JSX. Don’t call them as regular functions.
+* [Never pass around hooks as regular values](/reference/rules/react-calls-components-and-hooks#never-pass-around-hooks-as-regular-values) – Hooks should only be called inside of components. Never pass it around as a regular value.
+
 
 ## Never call component functions directly {/*never-call-component-functions-directly*/}
 Components should only be used in JSX. Don't call them as regular functions. React should call it.
