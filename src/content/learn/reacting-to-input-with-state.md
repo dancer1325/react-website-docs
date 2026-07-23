@@ -32,7 +32,7 @@ title: Reacting to Input with State
 
 ## Thinking about UI declaratively {/*thinking-about-ui-declaratively*/}
 
-### Step 1: Identify your component's different visual states {/*step-1-identify-your-components-different-visual-states*/}
+### Step 1: Identify your component's DIFFERENT visual states {/*step-1-identify-your-components-different-visual-states*/}
 
 * React's states
   * == ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine) | computer science + mockups / "visual states" | UX/UI

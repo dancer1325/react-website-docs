@@ -32,8 +32,9 @@ title: Responding to Events
 
 ### Reading props | event handlers {/*reading-props-in-event-handlers*/}
 
-* event handlers -- have access to the -- component's props
-  * Reason: 🧠event handlers are declared | component 🧠  
+* event handlers 
+  * have access -- to the -- component's props
+    * Reason: 🧠event handlers are declared | component 🧠  
 
 ### Passing event handlers -- as -- props {/*passing-event-handlers-as-props*/}
 

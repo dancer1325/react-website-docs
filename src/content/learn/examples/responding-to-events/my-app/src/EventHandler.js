@@ -44,6 +44,7 @@ function ButtonWrongInvoke() {
 function AlertButton({ message, children }) {
     function handleClick() {
         // handleClick can access `message` prop (== React component's prop)
+        console.log('4. event handlers -- have access to the -- component\'s props ' + children);
         alert(message);
     }
 

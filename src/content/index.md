@@ -13,7 +13,7 @@ permalink: index.html
       * ⚠️does NOT indicate how to ⚠️
         * route
         * fetch data
-      * ⚠️ If you want to build an entire full-stack React application, you can use a framework ⚠️
+      * ⚠️if you want to build an entire FULL-stack React application, you can use a framework ⚠️
         * [Next.js](https://nextjs.org/)
         * [Remix](https://remix.run/)
     * is

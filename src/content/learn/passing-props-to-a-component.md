@@ -16,7 +16,7 @@ title: Passing Props to a Component
 * _Example:_ `className`, `src`, `alt`, `width`, `height`
 
 * BUILT-IN React components' ALLOWED props
-  * predefined
+  * 👀predefined👀
     * _Example:_ `<img allowedProps />` follows [HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)
 * 👀your OWN components are freely customized by you 👀
 
@@ -59,12 +59,11 @@ title: Passing Props to a Component
 * use case
   * props / change over time | parent component
     * 👀== parent component -- pass -- props | child component / change over time 👀
-    * == props NOT ALWAYS static
-      * -> props == read-only snapshots | time -> 👀NEW version of props / EACH render 👀
-    * see [state](state-a-components-memory.md)
+    * JS engine -- will reclaim eventually the -- memory / related to OLD props object 
+    * ❌NOT change MANUALLY the props ❌
+    * [`setState`](state-a-components-memory.md)
 
-* if a component needs to change its props -> "ask" its parent component -- to pass it -- 👀NEW DIFFERENT props object👀
-  * Reason: 🧠props are [immutable](https://en.wikipedia.org/wiki/Immutable_object) term | computer science 🧠
-  * JavaScript engine -- will reclaim eventually the -- memory / related to OLD props object 
-  * ⚠️NOT change manually the props ⚠️
-  * [set the state](state-a-components-memory.md)
+* props
+  * are
+    * [IMMUTABLE](https://en.wikipedia.org/wiki/Immutable_object) / EACH render
+    * ❌NOT ALWAYS static❌

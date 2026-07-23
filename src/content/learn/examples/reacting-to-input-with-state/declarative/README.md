@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+* project's goal
+  * form / contains a textarea -- to -- submit information
+
 ## Steps to think about declaratively
 ### Step 1: Identify your component's different visual states
 
