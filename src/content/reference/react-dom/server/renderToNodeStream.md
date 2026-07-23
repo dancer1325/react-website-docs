@@ -2,40 +2,19 @@
 title: renderToNodeStream
 ---
 
-* ⚠️deprecated⚠️
-  * replaced -- by -- [`renderToPipeableStream`](renderToPipeableStream.md)
-
-
-<Intro>
-
-`renderToNodeStream` renders a React tree to a [Node.js Readable Stream.](https://nodejs.org/api/stream.html#readable-streams)
-
-```js
-const stream = renderToNodeStream(reactNode, options?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `renderToNodeStream`
+  * ⚠️deprecated⚠️
+    * replaced -- by -- [`renderToPipeableStream`](renderToPipeableStream.md)
+  * renders
+    * a React tree | [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams)
+  * use cases
+    * | server
 
 ## Reference {/*reference*/}
 
 ### `renderToNodeStream(reactNode, options?)` {/*rendertonodestream*/}
 
-On the server, call `renderToNodeStream` to get a [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) which you can pipe into the response.
-
-```js
-import { renderToNodeStream } from 'react-dom/server';
-
-const stream = renderToNodeStream(<App />);
-stream.pipe(response);
-```
-
-On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to make the server-generated HTML interactive.
-
-[See more examples below.](#usage)
+TODO: On the client, call [`hydrateRoot`](../client/hydrateRoot) to make the server-generated HTML interactive.
 
 #### Parameters {/*parameters*/}
 
@@ -46,7 +25,9 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 #### Returns {/*returns*/}
 
-A [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) that outputs an HTML string.
+* [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) / outputs an HTML string
+  * uses
+    * pipe | response
 
 #### Caveats {/*caveats*/}
 

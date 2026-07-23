@@ -2,35 +2,15 @@
 title: renderToStaticMarkup
 ---
 
-<Intro>
-
-`renderToStaticMarkup` renders a non-interactive React tree to an HTML string.
-
-```js
-const html = renderToStaticMarkup(reactNode, options?)
-```
-
-</Intro>
-
-<InlineToc />
-
----
+* `renderToStaticMarkup`
+  * renders
+    * a NON-interactive React tree | HTML string
+  * use cases
+    * | server
 
 ## Reference {/*reference*/}
 
 ### `renderToStaticMarkup(reactNode, options?)` {/*rendertostaticmarkup*/}
-
-On the server, call `renderToStaticMarkup` to render your app to HTML.
-
-```js
-import { renderToStaticMarkup } from 'react-dom/server';
-
-const html = renderToStaticMarkup(<Page />);
-```
-
-It will produce non-interactive HTML output of your React components.
-
-[See more examples below.](#usage)
 
 #### Parameters {/*parameters*/}
 
@@ -40,7 +20,7 @@ It will produce non-interactive HTML output of your React components.
 
 #### Returns {/*returns*/}
 
-An HTML string.
+* HTML string
 
 #### Caveats {/*caveats*/}
 

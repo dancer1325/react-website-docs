@@ -2,26 +2,25 @@
 title: Children
 ---
 
-<Pitfall>
+* `Children`
+  * == React API's object /
+    * let you
+      * manipulate & transform the JSX / you received -- as the -- [`children` prop](../../learn/passing-props-to-a-component.md#passing-props--component-passing-props-to-a-component) 
+  * use cases
+    * ⚠️RARELY⚠️
+      * Reason:🧠can lead -- to -- fragile code🧠
 
-Using `Children` is uncommon and can lead to fragile code. [See common alternatives.](#alternatives)
 
-</Pitfall>
 
-<Intro>
-
-`Children` lets you manipulate and transform the JSX you received as the [`children` prop.](/learn/passing-props-to-a-component#passing-jsx-as-children)
-
+TODO: 
 ```js
 const mappedChildren = Children.map(children, child =>
   <div className="Row">
     {child}
   </div>
 );
-
 ```
 
-lets you manipulate and transform the JSX received as the `children` prop
 
 ## Reference {/*reference*/}
 

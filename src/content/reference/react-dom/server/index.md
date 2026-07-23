@@ -34,18 +34,13 @@ title: Server React DOM APIs
   * ⚠️ONLY AVAILABLE | environments / NOT support streams ⚠️
   * are
     * [`renderToString`](renderToString) 
-    * [`renderToStaticMarkup`](/reference/react-dom/server/renderToStaticMarkup) renders a non-interactive React tree to a string.
-
-They have limited functionality compared to the streaming APIs.
-
----
+    * [`renderToStaticMarkup`](renderToStaticMarkup)
+  * vs [streaming APIs](#server-apis----for----web-streams-server-apis-for-web-streams)
+    * ⚠️limited functionality⚠️
 
 ## Deprecated server APIs {/*deprecated-server-apis*/}
 
-<Deprecated>
-
-These APIs will be removed in a future major version of React.
-
-</Deprecated>
-
-* [`renderToNodeStream`](/reference/react-dom/server/renderToNodeStream) renders a React tree to a [Node.js Readable stream.](https://nodejs.org/api/stream.html#readable-streams) (Deprecated.)
+* == methods / 
+  * | FUTURE major version of React,
+    * they will be removed
+  * [`renderToNodeStream`](renderToNodeStream)

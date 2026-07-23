@@ -10,6 +10,7 @@ title: Render and Commit
   * == process /
     * happens BEFORE displaying the components | screen
 
+TODO: 
 Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients
 * In this scenario, React is the waiter who puts in requests from customers and brings them their orders
 * This process of requesting and serving UI has three steps:
@@ -18,18 +19,14 @@ Imagine that your components are cooks in the kitchen, assembling tasty dishes f
 2. **Rendering** the component (preparing the order in the kitchen)
 3. **Committing** to the DOM (placing the order on the table)
 
-<IllustrationBlock sequential>
-  <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
-  <Illustration caption="Render" alt="The Card Chef gives React a fresh Card component." src="/images/docs/illustrations/i_render-and-commit2.png" />
-  <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
-</IllustrationBlock>
-
 ## Step 1: Trigger a render {/*step-1-trigger-a-render*/}
 
 There are two reasons for a component to render:
 
 1. It's the component's **initial render.**
 2. The component's (or one of its ancestors') **state has been updated.**
+
+![](../../../public/images/docs/illustrations/i_render-and-commit1.png)
 
 ### Initial render {/*initial-render*/}
 
@@ -71,6 +68,8 @@ Once the component has been initially rendered, you can trigger further renders 
 </IllustrationBlock>
 
 ## Step 2: React renders your components {/*step-2-react-renders-your-components*/}
+
+![](../../../public/images/docs/illustrations/i_render-and-commit2.png)
 
 After you trigger a render, React calls your components to figure out what to display on screen. **"Rendering" is React calling your components.**
 
@@ -142,6 +141,8 @@ The default behavior of rendering all components nested within the updated compo
 </DeepDive>
 
 ## Step 3: React commits changes to the DOM {/*step-3-react-commits-changes-to-the-dom*/}
+
+![](../../../public/images/docs/illustrations/i_render-and-commit3.png)
 
 After rendering (calling) your components, React will modify the DOM. 
 
